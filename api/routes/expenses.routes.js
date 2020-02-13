@@ -1,14 +1,15 @@
 /* IMPORTING MODULES */
 const express = require("express");
-const expenseControllers = require("../controllers/projects.controller");
+const expensesController = require("../controllers/projects.controller");
 
 /* CREATING A ROUTING FUNCTION */
 const router = express.Router();
 
 /* ROUTES */
-router.post("/add", expenseControllers.addNewExpense);
-router.patch("/update/:expenseId", expenseControllers.updateExpense);
-router.delete("/delete/:expenseId", expenseControllers.deleteExpense);
-router.get("/getAllExpenses", expenseControllers.getAllExpenses);
+router.post("/add", expensesController.addNewExpense);
+router.patch("/update/:expenseId", expensesController.updateExpense);
+router.delete("/delete/:expenseId", expensesController.deleteExpense);
+router.get("/getAllExpenses", expensesController.getAllExpenses);
+router.get("/getSingleExpense/:expenseId", expensesController.getSingleExpense);
 
 module.exports = router;
