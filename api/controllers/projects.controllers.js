@@ -35,9 +35,8 @@ const updateProject = async (req, res) => {
             return res.status(httpsStatus.NOT_FOUND)
         }
 
-        res.status(httpsStatus.CREATED).send({
-            message: 'Content created',
-            project
+        res.status(httpsStatus.OK).send({
+            message: 'Content updated'
         })
 
     } catch (error) {
@@ -67,7 +66,7 @@ const deleteProject = async (req, res) => {
 const getAllProject = async (req, res) => {
     try {
         const projects = await ProjectModel.getAllProjects();
-        if (project.length === 0) {
+        if (projects.length === 0) {
             return res.status(httpsStatus.NO_CONTENT).send({
                 message: 'there is no content'
             })

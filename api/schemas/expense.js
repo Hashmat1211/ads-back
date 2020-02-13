@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const expenseSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     type: {
-        type: Number,
+        type: String,
         required: true
     },
     amount: {

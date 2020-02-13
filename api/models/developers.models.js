@@ -23,7 +23,7 @@ const updateDeveloper = async (id, name) => {
 
 const deleteDeveloper = async (id) => {
     try {
-        return await Developer.delete({ _id: id });
+        return await Developer.deleteOne({ _id: id });
     } catch (error) {
         console.log('error in deleting name developer ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

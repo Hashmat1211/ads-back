@@ -5,20 +5,27 @@ const httpsStatus = require('http-status-codes');
 const addNewExpense = async (req, res) => {
     try {
         const name = req.body.name;
-        const { type, amount, payee, date } = req.body;
-        const prepObj = {
-            _id: mongoose.Types.ObjectId(),
-            name,
-            type,
-            amount,
-            payee,
-            date
-        }
-        await ExpenseModel.addNewExpense(prepObj);
+        const { type, amount, payee } = req.body;
+        let date = new Date(`${req.body.date} GMT`); //TODO: date day should be plus one every time
+        if (date instanceof Date && !isNaN(date.valueOf())) {
+            const prepObj = {
+                _id: mongoose.Types.ObjectId(),
+                type,
+                amount,
+                payee,
+                date
+            }
+            console.log('ex ', prepObj)
+            await ExpenseModel.addNewExpense(prepObj);
 
-        res.status(httpsStatus.CREATED).send({
-            message: 'Content created'
-        })
+            res.status(httpsStatus.CREATED).send({
+                message: 'Content created'
+            })
+        } else {
+            return res.status(httpsStatus.BAD_REQUEST).json({
+                message: "check your date format please"
+            })
+        }
 
     } catch (error) {
         console.log('error in add new expense ', error)
@@ -30,7 +37,10 @@ const addNewExpense = async (req, res) => {
 
 const updateExpense = async (req, res) => {
     try {
-        const id = req.params.expenseId
+        const id = req.params.expenseId;
+        if (req.body["date"]) {
+            req.body["date"] = new Date(`${req.body.date} GMT`);
+        }
         const prepObj = { ...req.body };
 
         const expense = await ExpenseModel.updateExpense(id, prepObj);
@@ -40,8 +50,8 @@ const updateExpense = async (req, res) => {
             return res.status(httpsStatus.NOT_FOUND)
         }
 
-        res.status(httpsStatus.CREATED).send({
-            message: 'Content created',
+        res.status(httpsStatus.OK).send({
+            message: 'Content updated',
             expense
         })
     } catch (error) {
@@ -71,7 +81,7 @@ const deleteExpense = async (req, res) => {
 const getAllExpenses = async (req, res) => {
     try {
         const expenses = await ExpenseModel.getAllExpenses();
-        if (expense.length === 0) {
+        if (expenses.length === 0) {
             return res.status(httpsStatus.NO_CONTENT).send({
                 message: 'there is no content'
             })

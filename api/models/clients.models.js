@@ -13,7 +13,7 @@ const addNewClient = async (clientObj) => {
 
 const updateClient = async (id, updateObj) => {
     try {
-        return await Client.findByIdAndUpdate({ _id: id }, { updateObj }, { upsert: true, new: true });
+        return await Client.findByIdAndUpdate({ _id: id }, updateObj, { upsert: true, new: true });
     } catch (error) {
         console.log('error in updating name client ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -22,7 +22,7 @@ const updateClient = async (id, updateObj) => {
 
 const deleteClient = async (id) => {
     try {
-        return await Client.delete({ _id: id });
+        return await Client.deleteOne({ _id: id });
     } catch (error) {
         console.log('error in deleting client ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

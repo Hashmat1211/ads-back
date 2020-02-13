@@ -24,7 +24,7 @@ const updateProject = async (id, name) => {
 
 const deleteProject = async (id) => {
     try {
-        return await Project.delete({ _id: id });
+        return await Project.deleteOne({ _id: id });
     } catch (error) {
         console.log('error in deleting name project ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

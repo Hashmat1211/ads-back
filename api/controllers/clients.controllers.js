@@ -29,7 +29,6 @@ const updateClient = async (req, res) => {
     try {
         const id = req.params.clientId
         const prepObj = { ...req.body };
-
         const client = await ClientModel.updateClient(id, prepObj);
 
         if (!client) {
@@ -37,9 +36,8 @@ const updateClient = async (req, res) => {
             return res.status(httpsStatus.NOT_FOUND)
         }
 
-        res.status(httpsStatus.CREATED).send({
-            message: 'Content created',
-            client
+        res.status(httpsStatus.OK).send({
+            message: 'Content updated'
         })
     } catch (error) {
         console.log('error in add new client ', error)
@@ -68,7 +66,7 @@ const deleteClient = async (req, res) => {
 const getAllClients = async (req, res) => {
     try {
         const clients = await ClientModel.getAllClients();
-        if (client.length === 0) {
+        if (clients.length === 0) {
             return res.status(httpsStatus.NO_CONTENT).send({
                 message: 'there is no content'
             })

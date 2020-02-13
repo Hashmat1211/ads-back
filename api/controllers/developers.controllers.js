@@ -35,9 +35,8 @@ const updateDeveloper = async (req, res) => {
             return res.status(httpsStatus.NOT_FOUND)
         }
 
-        res.status(httpsStatus.CREATED).send({
-            message: 'Content created',
-            developer
+        res.status(httpsStatus.OK).send({
+            message: 'Content updated'
         })
 
     } catch (error) {
@@ -67,7 +66,7 @@ const deleteDeveloper = async (req, res) => {
 const getAllDeveloper = async (req, res) => {
     try {
         const developers = await DeveloperModel.getAllDevelopers();
-        if (developer.length === 0) {
+        if (developers.length === 0) {
             return res.status(httpsStatus.NO_CONTENT).send({
                 message: 'there is no content'
             })
@@ -76,7 +75,7 @@ const getAllDeveloper = async (req, res) => {
             developers
         })
     } catch (error) {
-        console.log('error in add new developer ', error)
+        console.log('error in getting developers ', error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
             message: 'error'
         })
@@ -88,7 +87,8 @@ const getDeveloperById = async (req, res) => {
         const id = req.params.developerId;
         const developer = await DeveloperModel.getDeveloperById(id);
         if (!developer) {
-            return res.status(httpsStatus.NO_CONTENT).send({
+            //TODO: response message is not sending
+            return res.status(httpsStatus.NO_CONTENT).json({
                 message: 'there is no content'
             })
         }

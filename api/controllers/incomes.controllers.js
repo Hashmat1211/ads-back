@@ -5,7 +5,9 @@ const httpsStatus = require('http-status-codes');
 const addNewIncome = async (req, res) => {
     try {
         const name = req.body.name;
-        const { amount, developer, project, client, hours, startDate, endDate } = req.body;
+        const { amount, developer, project, client, hours } = req.body;
+        const startDate = new Date(`${req.body.startDate} GMT`);
+        const endDate = new Date(`${req.body.endDate} GMT`);
         const prepObj = {
             _id: mongoose.Types.ObjectId(),
             amount,
@@ -32,8 +34,15 @@ const addNewIncome = async (req, res) => {
 
 const updateIncome = async (req, res) => {
     try {
-        const id = req.params.incomeId
+        const id = req.params.incomeId;
+        if (req.body["startDate"]) {
+            req.body["startDate"] = new Date(`${req.body.startDate} GMT`);
+        }
+        if (req.body["endDate"]) {
+            req.body["endDate"] = new Date(`${req.body.endDate} GMT`);
+        }
         const prepObj = { ...req.body };
+
 
         const income = await IncomeModel.updateIncome(id, prepObj);
 
@@ -73,7 +82,7 @@ const deleteIncome = async (req, res) => {
 const getAllIncomes = async (req, res) => {
     try {
         const incomes = await IncomeModel.getAllIncomes();
-        if (income.length === 0) {
+        if (incomes.length === 0) {
             return res.status(httpsStatus.NO_CONTENT).send({
                 message: 'there is no content'
             })

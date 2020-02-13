@@ -14,7 +14,7 @@ const addNewExpense = async (expenseObj) => {
 
 const updateExpense = async (id, updateObj) => {
     try {
-        return await Client.findByIdAndUpdate({ _id: id }, { updateObj }, { upsert: true, new: true });
+        return await Expense.findByIdAndUpdate({ _id: id }, updateObj, { upsert: true, new: true });
     } catch (error) {
         console.log('error in updating name expense ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -23,7 +23,7 @@ const updateExpense = async (id, updateObj) => {
 
 const deleteExpense = async (id) => {
     try {
-        return await Expense.delete({ _id: id });
+        return await Expense.deleteOne({ _id: id });
     } catch (error) {
         console.log('error in deleting name expense ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
