@@ -5,13 +5,17 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const connetdb = require("./api/dependencies/connectdb");
-const cors = require("./api/dependencies/cors");
+const connetdb = require("./dependencies/connectiondb");
+const cors = require("./dependencies/cors");
 const HttpStatus = require('http-status-codes');
 
 /* ROUTES */
 
-const userRoutes = require("./api/routes/users.route");
+const developerRoutes = require("./api/routes/developers.routes");
+const clientRoutes = require("./api/routes/clients.routes");
+const expenseRoutes = require("./api/routes/expenses.routes");
+const incomeRoutes = require("./api/routes/incomes.routes");
+const projectRoutes = require("./api/routes/projects.routes");
 
 /* MONGODB CONNECTION */
 
@@ -36,7 +40,11 @@ app.use(cors);
 app.use("/public", express.static("public"));
 
 /*  ROUTE */
-app.use("/users", userRoutes);
+app.use("/expenses", expenseRoutes);
+app.use("/incomes", incomeRoutes);
+app.use("/developers", developerRoutes);
+app.use("/projects", projectRoutes);
+app.use("/clients", clientRoutes);
 
 app.get("/", (req, res) => {
   res.send("ok");

@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Client = require('../schemas/client');
 const httpsStatus = require('http-status-codes')
 

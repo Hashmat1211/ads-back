@@ -37,4 +37,4 @@ const projectSchema = mongoose.Schema({
 });
 
 // exporting schema
-module.exports = mongoose.model("Project", projectSchema);
+module.exports = mongoose.model("Income", projectSchema);

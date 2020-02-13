@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/add", developersController.addNewDeveloper);
 router.patch("/update/:developerId", developersController.updateDeveloper);
 router.delete("/delete/:developerId", developersController.deleteDeveloper);
-router.get("/getAllDevelopers", developersController.getAllDevelopers);
+router.get("/getAllDevelopers", developersController.getAllDeveloper);
 router.get("/getSingleDeveloper/:developerId", developersController.getDeveloperById);
 
 module.exports = router;

@@ -15,4 +15,4 @@ const clientSchema = mongoose.Schema({
 });
 
 // exporting schema
-module.exports = mongoose.model("Project", clientSchema);
+module.exports = mongoose.model("Client", clientSchema);

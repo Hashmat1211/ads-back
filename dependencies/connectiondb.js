@@ -7,10 +7,11 @@ const connection = () => {
   mongoose
     .connect(
       // `mongodb+srv://admin:${config.MONGO_ATLAS_PW}@manychatsubscribers-fpfhg.mongodb.net/test?retryWrites=true&w=majority`,
-      `mongodb+srv://hashmat2526:${config.MONGO_ATLAS_PW}@mflix-kkh9f.mongodb.net/subscribers?retryWrites=true&w=majority`,
+      `mongodb+srv://hashmat2526:${config.MONGO_ATLAS_PW}@mflix-kkh9f.mongodb.net/finance?retryWrites=true&w=majority`,
       {
         useCreateIndex: true,
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
       }
     )
     .catch(err => {
