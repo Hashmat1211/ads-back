@@ -1,14 +1,15 @@
 /* IMPORTING MODULES */
 const express = require("express");
-const projectControllers = require("../controllers/projects.controller");
+const projectsController = require("../controllers/projects.controllers");
 
 /* CREATING A ROUTING FUNCTION */
 const router = express.Router();
 
 /* ROUTES */
-router.post("/add", projectControllers.addNewProject);
-router.patch("/update/:projectId", projectControllers.updateProject);
-router.delete("/delete/:projectId", projectControllers.deleteProject);
-router.get("/getAllProjects", projectControllers.getAllProjects);
+router.post("/add", projectsController.addNewProject);
+router.patch("/update/:projectId", projectsController.updateProject);
+router.delete("/delete/:projectId", projectsController.deleteProject);
+router.get("/getAllProjects", projectsController.getAllProjects);
+router.get("/getSingleProject/:projectId", projectsController.getProjectById);
 
 module.exports = router;

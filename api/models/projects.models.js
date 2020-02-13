@@ -42,7 +42,7 @@ const getAllProjects = async () => {
 
 const getProjectById = async (id) => {
     try {
-        return await Project.find({ _id: id }).lean().select(`_id name`);
+        return await Project.findOne({ _id: id }).lean().select(`_id name`);
     } catch (error) {
         console.log('error in getting project by id ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -51,7 +51,7 @@ const getProjectById = async (id) => {
 
 const getProjectByName = async (name) => {
     try {
-        return await Project.find({ name }).lean().select(`_id name`);
+        return await Project.findOne({ name }).lean().select(`_id name`);
     } catch (error) {
         console.log('error in getting project by name ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
