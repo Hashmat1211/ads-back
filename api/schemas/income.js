@@ -15,12 +15,12 @@ const projectSchema = mongoose.Schema({
     project: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Developer",
-        required: true,
+        required: true
     },
     developer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Developer",
-        required: true,
+        required: true
     },
     hours: {
         type: Number,
