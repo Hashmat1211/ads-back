@@ -1,6 +1,8 @@
 const { isEmpty, isString, isValidDate, isValidObjectId, isNumber } = require('../../utils/custom.validator')
 const httpsStatus = require('http-status-codes')
 
+//TODO: date type problem in expense and income validators. needs to be fixed later
+
 const addExpenseValidator = (req, res, next) => {
     try {
         const errors = {};
@@ -34,7 +36,7 @@ const addExpenseValidator = (req, res, next) => {
         if (isEmpty(date)) {
             errors.date = 'date is required.';
 
-        } else if (!isValidDate(date)) {
+        } else if (!isString(date)) {
             errors.date = 'Should be a valid date';
         }
 
@@ -77,8 +79,8 @@ const updateExpenseValidator = (req, res, next) => {
         if (amount && !isNumber(amount)) {
             errors["amount"] = "amount should be valid string.";
         }
-        if (date && !isValidDate(amount)) {
-            errors["amount"] = "amount should be valid string.";
+        if (date && !isString(date)) {
+            errors["amount"] = "date should be valid string.";
         }
 
         if (Object.keys(errors).length > 0) {

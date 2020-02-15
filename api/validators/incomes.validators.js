@@ -1,4 +1,4 @@
-const { isEmpty, isValidDate, isNumber, isValidObjectId } = require('../../utils/custom.validator')
+const { isEmpty, isValidDate, isNumber, isValidObjectId, isString } = require('../../utils/custom.validator')
 const httpsStatus = require('http-status-codes')
 
 const addIncomeValidator = (req, res, next) => {
@@ -16,18 +16,18 @@ const addIncomeValidator = (req, res, next) => {
 
         // validation for payee in req.body
         if (isEmpty(hours)) {
+            console.log('hours')
             errors.hours = 'hours are required.';
-
         } else if (!isNumber(hours)) {
             errors.hours = 'Should be a valid Number';
         }
-
 
         // validation for date in req.body
         if (isEmpty(startDate)) {
             errors.startDate = 'startDate is required.';
 
-        } else if (!isValidDate(date)) {
+        } else if (!isString(startDate)) {
+
             errors.startDate = 'Should be a valid Date';
         }
 
@@ -35,7 +35,7 @@ const addIncomeValidator = (req, res, next) => {
         if (isEmpty(endDate)) {
             errors.endDate = 'endDate is required.';
 
-        } else if (!isValidDate(date)) {
+        } else if (!isString(endDate)) {
             errors.endDate = 'Should be a valid Date';
         }
 
@@ -61,7 +61,7 @@ const addIncomeValidator = (req, res, next) => {
         }
 
 
-
+        console.log(Object.keys(errors))
         if (Object.keys(errors).length > 0) {
             res.status(httpsStatus.BAD_REQUEST).json({
                 error: errors
@@ -71,6 +71,7 @@ const addIncomeValidator = (req, res, next) => {
         }
 
     } catch (error) {
+        console.log(error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).json({
             message: 'internal server error'
         })
@@ -98,9 +99,9 @@ const updateIncomeValidator = (req, res, next) => {
             errors["hours"] = "hours should be valid number.";
         } else if (amount && !isNumber(amount)) {
             errors["amount"] = "amount should be valid Number.";
-        } else if (startDate && !isValidDate(startDate)) {
+        } else if (startDate && !isString(startDate)) {
             errors["startDate"] = "startDate should be valid string.";
-        } else if (endDate && !isValidDate(endDate)) {
+        } else if (endDate && !isString(endDate)) {
             errors["endDate"] = "endDate should be valid string.";
         }
 

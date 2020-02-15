@@ -4,7 +4,6 @@ const httpsStatus = require('http-status-codes');
 
 const addNewIncome = async (req, res) => {
     try {
-        const name = req.body.name;
         const { amount, developer, project, client, hours } = req.body;
         const startDate = new Date(`${req.body.startDate} GMT`);
         const endDate = new Date(`${req.body.endDate} GMT`);
@@ -88,6 +87,7 @@ const getAllIncomes = async (req, res) => {
             })
         }
         res.status(httpsStatus.OK).send({
+            'total': incomes.length,
             incomes
         })
     } catch (error) {
@@ -118,10 +118,55 @@ const getIncomeById = async (req, res) => {
     }
 }
 
+const getIncomeByClientId = async (req, res) => {
+    try {
+        const id = req.params.clientId;
+        const incomes = await IncomeModel.getIncomeByClient(id);
+        if (incomes.length <= 0) {
+            return res.status(httpsStatus.NO_CONTENT).json({
+                message: 'there is no content'
+            })
+        }
+        const totalIncome = incomes[0].total;
+        res.status(httpsStatus.OK).json({
+            'totalIncome': totalIncome
+        })
+    } catch (error) {
+        console.log('error in add new income ', error)
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
+            message: 'error'
+        })
+    }
+}
+const searchIncomes = async (req, res) => {
+    try {
+        const searchData = req.body;
+        const incomes = await IncomeModel.getIncomeByDifferentParameters(searchData);
+        // console.log('incomes ... @ === ', incomes)
+        if (incomes.length <= 0) {
+            return res.status(httpsStatus.NO_CONTENT).json({
+                message: 'there is no content'
+            })
+        }
+        res.status(httpsStatus.OK).json({
+            'total': incomes.length,
+            'Income': incomes
+        })
+    } catch (error) {
+        console.log('error in add new income ', error)
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
+            message: 'error'
+        })
+    }
+}
+
+
 module.exports = {
     addNewIncome,
     updateIncome,
     deleteIncome,
     getAllIncomes,
-    getIncomeById
+    getIncomeById,
+    getIncomeByClientId,
+    searchIncomes
 }

@@ -1,5 +1,7 @@
 const Income = require('../schemas/income');
-const httpsStatus = require('http-status-codes')
+const httpsStatus = require('http-status-codes');
+const moment = require('moment');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 const addNewIncome = async (incomeObj) => {
     try {
@@ -59,9 +61,19 @@ const getIncomeByProject = async (project) => {
 
 const getIncomeByClient = async (client) => {
     try {
-        return await Income.findOne({ client }).lean().select(`_id amount developer project client hours startDate endDate`);
+        // return await Income.find({ client }).lean().select(`amount`);
+        return await Income.aggregate([{
+            $match: { $and: [{ client: client }] },
+        }, {
+            $group: {
+                _id: null,
+                total: {
+                    $sum: "$amount"
+                }
+            }
+        }]);
     } catch (error) {
-        console.log('error in getting income by name ', error);
+        console.log('error in getting income by client ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
     }
 }
@@ -83,7 +95,7 @@ const getIncomeByEndDate = async (endDate) => {
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
     }
 }
-const getIncomeByDeveloper = async (startDate) => {
+const getIncomeByDeveloper = async (developer) => {
     try {
         return await Income.findOne({ developer }).lean().select(`_id amount developer project client hours startDate endDate`);
     } catch (error) {
@@ -91,6 +103,56 @@ const getIncomeByDeveloper = async (startDate) => {
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
     }
 }
+
+const getIncomeByDifferentParameters = async (searchData) => {
+    try {
+        let conditionObj = {};
+
+        if (searchData.developer) {
+            conditionObj['developer'] = new ObjectId(searchData.developer);
+        }
+
+        if ('hours' in searchData) {
+            conditionObj['hours'] = Number(searchData.hours);
+        }
+
+        if ('amount' in searchData) {
+            conditionObj['amount'] = Number(searchData.amount);
+        }
+
+        if (searchData.project) {
+            conditionObj['project'] = new ObjectId(searchData.project);
+        }
+
+        if (searchData.client) {
+            conditionObj['client'] = new ObjectId(searchData.client);
+        }
+
+        if (!searchData.startDate && searchData.endDate) {
+            let date = new Date(new Date(searchData.endDate).setHours(00, 00, 00));
+            console.log('end date not startDates ', date)
+            conditionObj['endDate'] = { endDate: { $lte: date } };
+        } else if (searchData.startDate && !searchData.endDate) {
+            let date = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
+            console.log('start date not endDates ', date)
+            conditionObj['endDate'] = { $gt: date };
+        } else if (searchData.endDate && searchData.startDate) {
+            let startdate = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
+            let endDate = new Date(new Date(searchData.endDate).setHours(00, 00, 00));
+            console.log('end and start date // ', startdate, endDate)
+            conditionObj['endDate'] = { $lte: endDate, $gt: startdate }
+        }
+
+        const result = await Income.find(conditionObj).lean().select(`-__v`);
+        return result;
+
+    } catch (error) {
+        console.log('error in getting income by searching with different optional parameters ', error);
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
+    }
+}
+
+
 
 module.exports = {
     addNewIncome,
@@ -102,5 +164,6 @@ module.exports = {
     getIncomeByEndDate,
     getIncomeByProject,
     getIncomeByStartDate,
-    getIncomeByDeveloper
+    getIncomeByDeveloper,
+    getIncomeByDifferentParameters
 }
