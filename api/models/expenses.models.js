@@ -75,6 +75,50 @@ const getExpenseByDate = async (payee) => {
     }
 }
 
+const getExpenseByDifferentParameters = async (searchData) => {
+    try {
+        let conditionObj = {};
+
+        if (searchData.payee) {
+            conditionObj['payee'] = searchData.payee;
+        }
+
+        if ('amount' in searchData) {
+            conditionObj['amount'] = Number(searchData.amount);
+        }
+
+        if (searchData.type) {
+            conditionObj['type'] = searchData.type;
+        }
+
+        if (!searchData.startDate && searchData.endDate) {
+            let date = new Date(new Date(searchData.endDate).setHours(00, 00, 00));
+            conditionObj['date'] = { $lte: date };
+        } else if (searchData.startDate && !searchData.endDate) {
+            let date = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
+            conditionObj['date'] = { $gt: date };
+        } else if (searchData.endDate && searchData.startDate) {
+            let startdate = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
+            let endDate = new Date(new Date(searchData.endDate).setHours(00, 00, 00));
+            conditionObj['date'] = { $lte: endDate, $gt: startdate }
+        }
+
+        const result = await Expense.find(conditionObj).select(`-__v`);
+
+        const obj = {
+            total_Amount: result.reduce((sum, { amount }) => sum + amount, 0)
+        }
+
+        result.push(obj)
+
+        return result;
+
+    } catch (error) {
+        console.log('error in getting expense by searching with different optional parameters ', error);
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
+    }
+}
+
 module.exports = {
     addNewExpense,
     updateExpense,
@@ -83,5 +127,6 @@ module.exports = {
     getExpenseById,
     getExpenseByPayee,
     getExpenseByType,
-    getExpenseByDate
+    getExpenseByDate,
+    getExpenseByDifferentParameters
 }

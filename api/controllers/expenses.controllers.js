@@ -117,10 +117,33 @@ const getExpenseById = async (req, res) => {
     }
 }
 
+const searchExpense = async (req, res) => {
+    try {
+        const searchData = req.body;
+        const expenses = await ExpenseModel.getExpenseByDifferentParameters(searchData);
+        // console.log('expenses ... @ === ', expenses)
+        if (expenses.length <= 0) {
+            return res.status(httpsStatus.NO_CONTENT).json({
+                message: 'there is no content'
+            })
+        }
+        res.status(httpsStatus.OK).json({
+            'total': expenses.length,
+            'Expense': expenses
+        })
+    } catch (error) {
+        console.log('error in searching new expense ', error)
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
+            message: 'error'
+        })
+    }
+}
+
 module.exports = {
     addNewExpense,
     updateExpense,
     deleteExpense,
     getAllExpenses,
-    getExpenseById
+    getExpenseById,
+    searchExpense
 }

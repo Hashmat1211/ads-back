@@ -179,9 +179,48 @@ const getIncomeByIdValidator = (req, res, next) => {
     }
 }
 
+const searchIncomeValidator = (req, res, next) => {
+    try {
+        const errors = {};
+
+        const { developer, amount, client, hours, project, startDate, endDate } = req.body;
+
+        if (developer && !isValidObjectId(developer)) {
+            errors["developer"] = "developer Id should be valid object id.";
+        } else if (client && !isValidObjectId(client)) {
+            errors["client"] = "client Id should be valid object id.";
+        } else if (project && !isValidObjectId(project)) {
+            errors["project"] = "project Id should be valid object id.";
+        } else if (hours && !isNumber(hours)) {
+            errors["hours"] = "hours should be valid number.";
+        } else if (amount && !isNumber(amount)) {
+            errors["amount"] = "amount should be valid Number.";
+        } else if (startDate && !isString(startDate)) {
+            errors["startDate"] = "startDate should be valid string.";
+        } else if (endDate && !isString(endDate)) {
+            errors["endDate"] = "endDate should be valid string.";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            res.status(httpsStatus.BAD_REQUEST).json({
+                errors
+            })
+
+        } else {
+            next();
+        }
+
+    } catch (error) {
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).json({
+            message: 'internal server error'
+        })
+    }
+}
+
 module.exports = {
     addIncomeValidator,
     updateIncomeValidator,
     getIncomeByIdValidator,
-    deleteIncomeValidator
+    deleteIncomeValidator,
+    searchIncomeValidator
 }

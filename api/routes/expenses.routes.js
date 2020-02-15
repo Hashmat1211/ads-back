@@ -9,6 +9,7 @@ const router = express.Router();
 
 /* ROUTES */
 router.post("/add", expensesValidator.addExpenseValidator, expensesController.addNewExpense);
+router.post("/search", expensesValidator.searchExpenseValidator, expensesController.searchExpense);
 router.patch("/update/:expenseId", expensesValidator.updateExpenseValidator, expensesController.updateExpense);
 router.delete("/delete/:expenseId", expensesValidator.deleteExpenseValidator, expensesController.deleteExpense);
 router.get("/getAllExpenses", expensesController.getAllExpenses);

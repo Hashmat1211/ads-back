@@ -11,8 +11,9 @@ const router = express.Router();
 router.post("/add", incomesValidator.addIncomeValidator, incomesController.addNewIncome);
 router.patch("/update/:incomeId", incomesValidator.updateIncomeValidator, incomesController.updateIncome);
 router.delete("/delete/:incomeId", incomesValidator.deleteIncomeValidator, incomesController.deleteIncome);
-router.post('/search', incomesController.searchIncomes)
+router.post('/search', incomesValidator.searchIncomeValidator, incomesController.searchIncomes)
 router.get("/getAllIncomes", incomesController.getAllIncomes);
 router.get("/getSingleIncome/:incomeId", incomesValidator.getIncomeByIdValidator, incomesController.getIncomeById);
 router.get('/client/:clientId', incomesController.getIncomeByClientId);
+
 module.exports = router;

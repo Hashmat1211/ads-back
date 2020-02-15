@@ -153,7 +153,7 @@ const searchIncomes = async (req, res) => {
             'Income': incomes
         })
     } catch (error) {
-        console.log('error in add new income ', error)
+        console.log('error in searching incomes ', error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
             message: 'error'
         })

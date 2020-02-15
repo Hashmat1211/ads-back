@@ -157,6 +157,42 @@ const getExpenseByIdValidator = (req, res, next) => {
     }
 }
 
+const searchExpenseValidator = (req, res, next) => {
+    try {
+        const errors = {};
+
+        const { type, amount, payee, date } = req.body;
+
+        if (type && !isString(type)) {
+            errors["type"] = "type should be valid string.";
+        }
+        if (type && !isString(payee)) {
+            errors["payee"] = "payee should be valid string.";
+        }
+
+        if (amount && !isNumber(amount)) {
+            errors["amount"] = "amount should be valid string.";
+        }
+        if (date && !isString(date)) {
+            errors["amount"] = "date should be valid string.";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            res.status(httpsStatus.BAD_REQUEST).json({
+                error: errors
+            })
+
+        } else {
+            next();
+        }
+
+    } catch (error) {
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).json({
+            message: 'internal server error'
+        })
+    }
+}
+
 
 
 
@@ -166,5 +202,6 @@ module.exports = {
     addExpenseValidator,
     updateExpenseValidator,
     getExpenseByIdValidator,
-    deleteExpenseValidator
+    deleteExpenseValidator,
+    searchExpenseValidator
 }

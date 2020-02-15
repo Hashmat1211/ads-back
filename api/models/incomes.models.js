@@ -130,20 +130,24 @@ const getIncomeByDifferentParameters = async (searchData) => {
 
         if (!searchData.startDate && searchData.endDate) {
             let date = new Date(new Date(searchData.endDate).setHours(00, 00, 00));
-            console.log('end date not startDates ', date)
-            conditionObj['endDate'] = { endDate: { $lte: date } };
+            conditionObj['endDate'] = { $lte: date };
         } else if (searchData.startDate && !searchData.endDate) {
             let date = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
-            console.log('start date not endDates ', date)
             conditionObj['endDate'] = { $gt: date };
         } else if (searchData.endDate && searchData.startDate) {
             let startdate = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
             let endDate = new Date(new Date(searchData.endDate).setHours(00, 00, 00));
-            console.log('end and start date // ', startdate, endDate)
             conditionObj['endDate'] = { $lte: endDate, $gt: startdate }
         }
 
         const result = await Income.find(conditionObj).lean().select(`-__v`);
+
+        const obj = {
+            total_Amount: result.reduce((sum, { amount }) => sum + amount, 0)
+        }
+
+        result.push(obj)
+
         return result;
 
     } catch (error) {
