@@ -87,6 +87,7 @@ const getAllExpenses = async (req, res) => {
             })
         }
         res.status(httpsStatus.OK).send({
+            totalExpenses: expenses.length,
             expenses
         })
     } catch (error) {

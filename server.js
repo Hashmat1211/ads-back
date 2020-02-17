@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const connetdb = require("./dependencies/connectiondb");
 const cors = require("./dependencies/cors");
 const HttpStatus = require('http-status-codes');
+const path = __dirname + '/public/';
 
 /* ROUTES */
 
@@ -33,7 +34,18 @@ app.use(bodyParser.json());
 
 /*  HANDLING CORS */
 
-app.use(cors);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Accept, Content-Type, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+    return res.status(200).json({});
+  }
+  next()
+});
 
 /* SERVING STATIC FILES */
 
@@ -47,7 +59,40 @@ app.use("/projects", projectRoutes);
 app.use("/clients", clientRoutes);
 
 app.get("/", (req, res) => {
-  res.send("ok");
+  res.sendFile(path + 'index.html');
+});
+app.get("/index.html", (req, res) => {
+  res.sendFile(path + 'index.html');
+});
+app.get("/addDeveloper.html", (req, res) => {
+  res.sendFile(path + 'addDeveloper.html');
+});
+app.get("/addExpense.html", (req, res) => {
+  res.sendFile(path + 'addExpense.html');
+});
+app.get("/addIncome.html", (req, res) => {
+  res.sendFile(path + 'addIncome.html');
+});
+app.get("/addClient.html", (req, res) => {
+  res.sendFile(path + 'addClient.html');
+});
+app.get("/addProject.html", (req, res) => {
+  res.sendFile(path + 'addProject.html');
+});
+app.get("/viewProjects.html", (req, res) => {
+  res.sendFile(path + 'viewProjects.html');
+});
+app.get("/viewClients.html", (req, res) => {
+  res.sendFile(path + 'viewClients.html');
+});
+app.get("/viewDevelopers.html", (req, res) => {
+  res.sendFile(path + 'viewDevelopers.html');
+});
+app.get("/viewIncomes.html", (req, res) => {
+  res.sendFile(path + 'viewIncomes.html');
+});
+app.get("/viewExpenses.html", (req, res) => {
+  res.sendFile(path + 'viewExpenses.html');
 });
 
 /* HANDLING ERROR MIDDLEWARES */

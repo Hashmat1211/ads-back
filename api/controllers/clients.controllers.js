@@ -72,6 +72,7 @@ const getAllClients = async (req, res) => {
             })
         }
         res.status(httpsStatus.OK).send({
+            totalClients: clients.length,
             clients
         })
     } catch (error) {

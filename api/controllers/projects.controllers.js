@@ -72,7 +72,7 @@ const getAllProject = async (req, res) => {
             })
         }
         res.status(httpsStatus.OK).send({
-            projects
+            projects, totalProjects: projects.length
         })
     } catch (error) {
         console.log('error in add new project ', error)

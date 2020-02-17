@@ -72,6 +72,7 @@ const getAllDeveloper = async (req, res) => {
             })
         }
         res.status(httpsStatus.OK).send({
+            totalDevelopers: developers.length,
             developers
         })
     } catch (error) {
@@ -93,6 +94,7 @@ const getDeveloperById = async (req, res) => {
             })
         }
         res.status(httpsStatus.OK).send({
+
             developer
         })
     } catch (error) {
