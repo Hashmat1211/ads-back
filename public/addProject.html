@@ -32,17 +32,17 @@
 
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="assets/media/favicons/favicon.png" />
+    <link rel="shortcut icon" href="public/assets/media/favicons/favicon.png" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="assets/media/favicons/favicon-192x192.png"
+      href="public/assets/media/favicons/favicon-192x192.png"
     />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="assets/media/favicons/apple-touch-icon-180x180.png"
+      href="public/assets/media/favicons/apple-touch-icon-180x180.png"
     />
     <!-- END Icons -->
 
@@ -349,11 +349,7 @@
               </div>
             </div>
             <div class="block-content">
-              <form
-                action="be_pages_dashboard.html"
-                method="post"
-                onsubmit="return false;"
-              >
+              <form>
                 <div class="form-group mb-15">
                   <label for="side-overlay-profile-name">Name</label>
                   <div class="input-group">
@@ -1237,78 +1233,77 @@
                 <div class="col-xl-6">
                   <!-- jQuery Validation functionality is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js -->
                   <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                  <!-- <form> -->
-                  <div class="form-group row">
-                    <label class="col-lg-4 col-form-label" for="val-username"
-                      >Project Name <span class="text-danger">*</span></label
-                    >
-                    <div class="col-lg-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="val-username"
-                        name="val-username"
-                        placeholder="Enter a username.."
-                      />
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-lg-4 col-form-label" for="val-details"
-                      >Details about Project<span class="text-danger"
-                        >*</span
-                      ></label
-                    >
-                    <div class="col-lg-8">
-                      <textarea
-                        class="form-control"
-                        id="val-details"
-                        name="val-details"
-                        rows="5"
-                        placeholder="What would you like to add in details?"
-                      ></textarea>
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-lg-4 col-form-label"
-                      ><a
-                        data-toggle="modal"
-                        data-target="#modal-terms"
-                        href="#"
-                        >Terms &amp; Conditions</a
+                  <form id="add">
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label" for="name"
+                        >Project Name <span class="text-danger">*</span></label
                       >
-                      <span class="text-danger">*</span></label
-                    >
-                    <div class="col-lg-8">
-                      <label
-                        class="css-control css-control-primary css-checkbox"
-                        for="val-terms"
-                      >
+                      <div class="col-lg-8">
                         <input
-                          type="checkbox"
-                          class="css-control-input"
-                          id="val-terms"
-                          name="val-terms"
-                          value="1"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          name="name"
+                          placeholder="Enter a username.."
                         />
-                        <span class="css-control-indicator"></span> I agree to
-                        the terms
-                      </label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-lg-8 ml-auto">
-                      <button onclick="fn()" class="btn btn-alt-primary">
-                        Submit
-                      </button>
+
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label" for="details"
+                        >Details about Project<span class="text-danger"
+                          >*</span
+                        ></label
+                      >
+                      <div class="col-lg-8">
+                        <textarea
+                          class="form-control"
+                          id="details"
+                          name="details"
+                          rows="5"
+                          placeholder="What would you like to add in details?"
+                        ></textarea>
+                      </div>
                     </div>
-                  </div>
-                  <!-- </form> -->
-                  <!-- 
-                  <button onclick="fn()" class="btn btn-alt-primary">
-                    Submit
-                  </button> -->
+
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label"
+                        ><a
+                          data-toggle="modal"
+                          data-target="#modal-terms"
+                          href="#"
+                          >Terms &amp; Conditions</a
+                        >
+                        <span class="text-danger">*</span></label
+                      >
+                      <div class="col-lg-8">
+                        <label
+                          class="css-control css-control-primary css-checkbox"
+                          for="val-terms"
+                        >
+                          <input
+                            type="checkbox"
+                            class="css-control-input"
+                            id="val-terms"
+                            name="val-terms"
+                            value="1"
+                          />
+                          <span class="css-control-indicator"></span> I agree to
+                          the terms
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-8 ml-auto">
+                        <button
+                          onclick="addProject()"
+                          class="btn btn-alt-primary"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -1374,11 +1369,13 @@
 
     <!-- Page JS Plugins -->
     <script src="public/assets/js/plugins/chartjs/Chart.bundle.min.js"></script>
+
     <script src="public/assets/js/plugins/slick/slick.min.js"></script>
 
     <!-- Page JS Code -->
     <script src="public/assets/js/pages/be_pages_dashboard.min.js"></script>
+
     <!-- Custom js -->
-    <script src="public/assets/js/custom/projects.js"></script>
+    <script src="public/assets/js/custom/addProject.js"></script>
   </body>
 </html>

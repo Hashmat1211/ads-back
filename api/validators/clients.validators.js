@@ -4,6 +4,7 @@ const httpsStatus = require('http-status-codes')
 const addClientValidator = (req, res, next) => {
     try {
         const errors = {};
+        console.log('req.body ', JSON.stringify(req.body))
         const { name, contact } = req.body;
 
         // validation for name in req.body

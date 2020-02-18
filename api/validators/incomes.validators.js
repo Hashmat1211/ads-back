@@ -4,6 +4,7 @@ const httpsStatus = require('http-status-codes')
 const addIncomeValidator = (req, res, next) => {
     try {
         const errors = {};
+        console.log('req.body ', JSON.stringify(req.body))
         const { developer, amount, client, hours, project, startDate, endDate } = req.body;
 
         // validation for name in req.body

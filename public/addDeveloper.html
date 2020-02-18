@@ -721,8 +721,7 @@
               </li>
               <li>
                 <a class="nav-submenu" data-toggle="nav-submenu" href="#"
-                  ><i class="si si-badge"></i
-                  ><span class="sidebar-mini-visible">Developers</span></a
+                  ><i class="si si-badge"></i><span>Developers</span></a
                 >
                 <ul>
                   <li>
@@ -1237,13 +1236,9 @@
                 <div class="col-xl-6">
                   <!-- jQuery Validation functionality is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js -->
                   <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                  <form
-                    class="js-validation-bootstrap"
-                    action="be_forms_validation.html"
-                    method="post"
-                  >
+                  <form id="addDeveloper">
                     <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-username"
+                      <label class="col-lg-4 col-form-label" for="name"
                         >Developer Name
                         <span class="text-danger">*</span></label
                       >
@@ -1251,38 +1246,36 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="val-username"
-                          name="val-username"
+                          id="name"
+                          name="name"
                           placeholder="Enter a username.."
                         />
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-email"
+                      <label class="col-lg-4 col-form-label" for="email"
                         >Email <span class="text-danger">*</span></label
                       >
                       <div class="col-lg-8">
                         <input
                           type="text"
                           class="form-control"
-                          id="val-email"
-                          name="val-email"
+                          id="email"
+                          name="email"
                           placeholder="Your valid email.."
                         />
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label
-                        class="col-lg-4 col-form-label"
-                        for="val-suggestions"
-                        >Description <span class="text-danger">*</span></label
+                      <label class="col-lg-4 col-form-label" for="details"
+                        >Details <span class="text-danger">*</span></label
                       >
                       <div class="col-lg-8">
                         <textarea
                           class="form-control"
-                          id="val-suggestions"
-                          name="val-suggestions"
+                          id="details"
+                          name="details"
                           rows="5"
                           placeholder="What would you like to see?"
                         ></textarea>
@@ -1290,15 +1283,15 @@
                     </div>
 
                     <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-phoneus"
+                      <label class="col-lg-4 col-form-label" for="contact"
                         >Phone <span class="text-danger">*</span></label
                       >
                       <div class="col-lg-6">
                         <input
                           type="text"
                           class="form-control"
-                          id="val-phoneus"
-                          name="val-phoneus"
+                          id="contact"
+                          name="contact"
                           placeholder="0092-000-000-0000"
                         />
                       </div>
@@ -1316,13 +1309,13 @@
                       <div class="col-lg-8">
                         <label
                           class="css-control css-control-primary css-checkbox"
-                          for="val-terms"
+                          for="terms"
                         >
                           <input
                             type="checkbox"
                             class="css-control-input"
-                            id="val-terms"
-                            name="val-terms"
+                            id="terms"
+                            name="terms"
                             value="1"
                           />
                           <span class="css-control-indicator"></span> I agree to
@@ -1332,7 +1325,10 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-lg-8 ml-auto">
-                        <button type="submit" class="btn btn-alt-primary">
+                        <button
+                          onclick="addDeveloper()"
+                          class="btn btn-alt-primary"
+                        >
                           Submit
                         </button>
                       </div>
@@ -1407,5 +1403,8 @@
 
     <!-- Page JS Code -->
     <script src="public/assets/js/pages/be_pages_dashboard.min.js"></script>
+
+    <!-- custom JS Code -->
+    <script src="public/assets/js/custom/addDeveloper.js"></script>
   </body>
 </html>

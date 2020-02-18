@@ -4,7 +4,9 @@ const httpsStatus = require('http-status-codes')
 const addProjectValidator = (req, res, next) => {
     try {
         const errors = {};
-        const { name } = req.body;
+        console.log('req.body ', JSON.stringify(req.body))
+        const { name, details } = req.body;
+        console.log(name, details)
 
         // validation for name in req.body
         if (isEmpty(name)) {

@@ -23,10 +23,10 @@ function viewExpensesDataTo() {
                 >
             </td>`)
                 .append(`<td class="d-none d-sm-table-cell">
-                <span class="badge badge-success">${v.email}</span>
+                <span class="badge badge-success">${v.type}</span>
             </td>`)
                 .append(`<td class="d-none d-sm-table-cell">
-                <span>${v.name}</span>
+                <span>${v.payee}</span>
             </td>`)
                 .append(` <td class="d-none d-sm-table-cell">
                 ${v.date}

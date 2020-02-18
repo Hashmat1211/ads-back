@@ -87,7 +87,7 @@ const getAllIncomes = async (req, res) => {
             })
         }
         res.status(httpsStatus.OK).send({
-            'total': incomes.length,
+            'totalIncomes': incomes.length,
             incomes
         })
     } catch (error) {
