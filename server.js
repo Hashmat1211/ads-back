@@ -32,6 +32,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 /*  HANDLING CORS */
 
 app.use((req, res, next) => {
@@ -41,7 +42,7 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Accept, Content-Type, Authorization"
   );
   if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, UPDATE");
     return res.status(200).json({});
   }
   next()
@@ -93,6 +94,9 @@ app.get("/viewIncomes.html", (req, res) => {
 });
 app.get("/viewExpenses.html", (req, res) => {
   res.sendFile(path + 'viewExpenses.html');
+});
+app.get("/updateIncome.html/:id", (req, res) => {
+  res.sendFile(path + 'updateIncome.html');
 });
 
 /* HANDLING ERROR MIDDLEWARES */

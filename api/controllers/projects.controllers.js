@@ -95,7 +95,27 @@ const getProjectById = async (req, res) => {
             project
         })
     } catch (error) {
-        console.log('error in add new project ', error)
+        console.log('error in getting  project by id ', error)
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
+            message: 'error'
+        })
+    }
+}
+
+const getProjectIdByProjectName = async (req, res) => {
+    try {
+        const name = req.body.name;
+        const project = await ProjectModel.getProjectByName(name);
+        if (!project) {
+            return res.status(httpsStatus.NO_CONTENT).send({
+                message: 'there is no content'
+            })
+        }
+        res.status(httpsStatus.OK).send({
+            project
+        })
+    } catch (error) {
+        console.log('error in getting project name ', error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
             message: 'error'
         })
@@ -107,5 +127,6 @@ module.exports = {
     updateProject,
     deleteProject,
     getAllProject,
-    getProjectById
+    getProjectById,
+    getProjectIdByProjectName
 }

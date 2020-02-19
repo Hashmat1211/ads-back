@@ -96,7 +96,26 @@ const getClientById = async (req, res) => {
             client
         })
     } catch (error) {
-        console.log('error in add new client ', error)
+        console.log('error in getting  client by id ', error)
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
+            message: 'error'
+        })
+    }
+}
+const getClientIdByClientName = async (req, res) => {
+    try {
+        const name = req.body.name;
+        const client = await ClientModel.getClientByName(name);
+        if (!client) {
+            return res.status(httpsStatus.NO_CONTENT).send({
+                message: 'there is no client of this name'
+            })
+        }
+        res.status(httpsStatus.OK).send({
+            client
+        })
+    } catch (error) {
+        console.log('error in getting client by name ', error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
             message: 'error'
         })
@@ -108,5 +127,6 @@ module.exports = {
     updateClient,
     deleteClient,
     getAllClients,
-    getClientById
+    getClientById,
+    getClientIdByClientName
 }

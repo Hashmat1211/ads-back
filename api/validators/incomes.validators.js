@@ -82,7 +82,7 @@ const addIncomeValidator = (req, res, next) => {
 const updateIncomeValidator = (req, res, next) => {
     try {
         const errors = {};
-
+        console.log('req.body in update ', JSON.stringify(req.body))
         const { developer, amount, client, hours, project, startDate, endDate } = req.body;
         const { incomeId } = req.params;
 

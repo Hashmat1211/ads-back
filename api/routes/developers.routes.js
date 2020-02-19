@@ -13,5 +13,5 @@ router.patch("/update/:developerId", developersValidator.updateDeveloperValidato
 router.delete("/delete/:developerId", developersValidator.deleteDeveloperValidator, developersController.deleteDeveloper);
 router.get("/getAllDevelopers", developersController.getAllDeveloper);
 router.get("/getSingleDeveloper/:developerId", developersValidator.getDeveloperByIdValidator, developersController.getDeveloperById);
-
+router.post('/getDeveloperIdByDeveloperName/', developersController.getDeveloperIdByDeveloperName);
 module.exports = router;

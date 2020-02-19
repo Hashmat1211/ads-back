@@ -104,11 +104,31 @@ const getDeveloperById = async (req, res) => {
         })
     }
 }
+const getDeveloperIdByDeveloperName = async (req, res) => {
+    try {
+        const name = req.body.name;
+        const developer = await DeveloperModel.getDeveloperByName(name);
+        if (!developer) {
+            return res.status(httpsStatus.NO_CONTENT).send({
+                message: 'there is no content'
+            })
+        }
+        res.status(httpsStatus.OK).send({
+            developer
+        })
+    } catch (error) {
+        console.log('error in getting Developer name ', error)
+        res.status(httpsStatus.INTERNAL_SERVER_ERROR).send({
+            message: 'error'
+        })
+    }
+}
 
 module.exports = {
     addNewDeveloper,
     updateDeveloper,
     deleteDeveloper,
     getAllDeveloper,
-    getDeveloperById
+    getDeveloperById,
+    getDeveloperIdByDeveloperName
 }

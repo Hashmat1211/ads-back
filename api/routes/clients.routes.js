@@ -13,5 +13,5 @@ router.patch("/update/:clientId", clientsValidator.updateClientValidator, client
 router.delete("/delete/:clientId", clientsValidator.deleteClientValidator, clientsController.deleteClient);
 router.get("/getAllClients", clientsController.getAllClients);
 router.get("/getSingleClient/:clientId", clientsValidator.getClientByIdValidator, clientsController.getClientById);
-
+router.post('/getClientIdByClientName/', clientsController.getClientIdByClientName);
 module.exports = router;
