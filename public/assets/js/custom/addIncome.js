@@ -34,7 +34,11 @@ $(document).ready(function () {
 function addIncome() {
     console.log('inside add income');
     var data = $('#addIncome').serialize();
+    data.split('developer=')[1].split('&')[0];
+    console.log(data.split('developer=')[1].split('&')[0])
     alert(data)
-    $.post("incomes/add", data
-    );
+    // $.post("incomes/add", data
+    // );
+
+
 }
