@@ -43,14 +43,19 @@ const updateIncome = async (req, res) => {
         const prepObj = { ...req.body };
 
 
+
         const income = await IncomeModel.updateIncome(id, prepObj);
+        console.log('income ', income)
 
         if (!income) {
             console.log('income not found');
-            return res.status(httpsStatus.NOT_FOUND)
+            return res.status(httpsStatus.NO_CONTENT).json({
+                message: 'Content not found'
+
+            })
         }
 
-        res.status(httpsStatus.CREATED).send({
+        res.status(httpsStatus.CREATED).json({
             message: 'Content created',
             income
         })

@@ -16,4 +16,5 @@ router.get("/getAllIncomes", incomesController.getAllIncomes);
 router.get("/getSingleIncome/:incomeId", incomesValidator.getIncomeByIdValidator, incomesController.getIncomeById);
 router.get('/client/:clientId', incomesController.getIncomeByClientId);
 
+
 module.exports = router;

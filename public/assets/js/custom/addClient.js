@@ -9,5 +9,4 @@ function addClient() {
     alert(data)
     $.post("clients/add", data
     );
-
 }

@@ -50,7 +50,7 @@ const getDeveloperById = async (id) => {
 
 const getDeveloperByName = async (name) => {
     try {
-        return await Developer.findOne({ name }).lean().select(`_id name`);
+        return await Developer.findOne({ name }).lean().select(`_id`);
     } catch (error) {
         console.log('error in getting developer by name ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

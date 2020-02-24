@@ -7,19 +7,20 @@ const addIncomeValidator = (req, res, next) => {
         console.log('req.body ', JSON.stringify(req.body))
         const { developer, amount, client, hours, project, startDate, endDate } = req.body;
 
+
         // validation for name in req.body
-        if (isEmpty(amount)) {
+        if (isEmpty(Number(amount))) {
             errors.amount = 'amount is required.';
 
-        } else if (!isNumber(amount)) {
+        } else if (!isNumber(Number(amount))) {
             errors.amount = 'Should be a valid Number';
         }
 
         // validation for payee in req.body
-        if (isEmpty(hours)) {
+        if (isEmpty(Number(hours))) {
             console.log('hours')
             errors.hours = 'hours are required.';
-        } else if (!isNumber(hours)) {
+        } else if (!isNumber(Number(hours))) {
             errors.hours = 'Should be a valid Number';
         }
 
@@ -96,9 +97,9 @@ const updateIncomeValidator = (req, res, next) => {
             errors["client"] = "client Id should be valid object id.";
         } else if (project && !isValidObjectId(project)) {
             errors["project"] = "project Id should be valid object id.";
-        } else if (hours && !isNumber(hours)) {
+        } else if (hours && !isNumber(Number(hours))) {
             errors["hours"] = "hours should be valid number.";
-        } else if (amount && !isNumber(amount)) {
+        } else if (amount && !isNumber(Number(amount))) {
             errors["amount"] = "amount should be valid Number.";
         } else if (startDate && !isString(startDate)) {
             errors["startDate"] = "startDate should be valid string.";

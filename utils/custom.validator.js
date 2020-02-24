@@ -106,14 +106,7 @@ const isDecimalNumber = (value) => {
  * @param {*} value // Accepts string
  */
 const isNumber = (value) => {
-  const number = value;
-  const myRegEx = /^(\s*[0-9]+\s*)+$/;
-  const isValid = myRegEx.test(number);
-  if (isValid) {
-    return true;
-  } else {
-    return false;
-  }
+  return typeof value === 'number' && isFinite(value);
 };
 
 /**

@@ -16,7 +16,7 @@ const addNewIncome = async (incomeObj) => {
 
 const updateIncome = async (id, updateObj) => {
     try {
-        return await Income.findByIdAndUpdate({ _id: id }, updateObj, { upsert: true, new: true });
+        return await Income.findByIdAndUpdate({ _id: id }, updateObj, { new: true });
     } catch (error) {
         console.log('error in updating name income ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
