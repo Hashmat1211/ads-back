@@ -1239,137 +1239,112 @@
                 <div class="col-xl-6">
                   <!-- jQuery Validation functionality is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js -->
                   <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                  <form id="addExpense">
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="type"
-                        >Expense Type <span class="text-danger">*</span></label
-                      >
-                      <div class="col-lg-8">
+
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label" for="type"
+                      >Expense Type <span class="text-danger">*</span></label
+                    >
+                    <div class="col-lg-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="type"
+                        name="type"
+                        placeholder="Enter Expense.."
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label" for="payee"
+                      >Payee <span class="text-danger">*</span></label
+                    >
+                    <div class="col-lg-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="payee"
+                        name="payee"
+                        placeholder="who you paid"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label" for="details"
+                      >Expense details <span class="text-danger">*</span></label
+                    >
+                    <div class="col-lg-8">
+                      <textarea
+                        class="form-control"
+                        id="details"
+                        name="details"
+                        rows="5"
+                        placeholder="Enter any expense details?"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label" for="amount"
+                      >Amount <span class="text-danger">*</span></label
+                    >
+                    <div class="col-lg-6">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="amount"
+                        name="amount"
+                        placeholder="Pkr 2160"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label" for="contact"
+                      >Phone (US) <span class="text-danger">*</span></label
+                    >
+                    <div class="col-lg-6">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="contact"
+                        name="contact"
+                        placeholder="212-999-0000"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-lg-8">
+                      <div class="form-material">
                         <input
                           type="text"
-                          class="form-control"
-                          id="name"
-                          name="name"
-                          placeholder="Enter Expense.."
+                          class="js-datepicker form-control"
+                          id="date"
+                          name="date"
+                          data-week-start="1"
+                          data-autoclose="true"
+                          data-today-highlight="true"
+                          data-date-format="yy/mm/dd"
+                          placeholder="yy/mm/dd"
                         />
+                        <label for="example-datepicker4">Choose a date</label>
                       </div>
                     </div>
+                  </div>
 
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="payee"
-                        >Payee <span class="text-danger">*</span></label
+                  <div class="form-group row">
+                    <div class="col-lg-8 ml-auto">
+                      <button
+                        type="submit"
+                        onclick="addExpense()"
+                        class="btn btn-alt-primary"
                       >
-                      <div class="col-lg-8">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="username"
-                          name="val-username"
-                          placeholder="who you paid"
-                        />
-                      </div>
+                        Submit
+                      </button>
                     </div>
-
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-details"
-                        >Expense details
-                        <span class="text-danger">*</span></label
-                      >
-                      <div class="col-lg-8">
-                        <textarea
-                          class="form-control"
-                          id="val-details"
-                          name="val-details"
-                          rows="5"
-                          placeholder="Enter any expense details?"
-                        ></textarea>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-currency"
-                        >Amount <span class="text-danger">*</span></label
-                      >
-                      <div class="col-lg-6">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="val-currency"
-                          name="val-currency"
-                          placeholder="Pkr 2160"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-phoneus"
-                        >Phone (US) <span class="text-danger">*</span></label
-                      >
-                      <div class="col-lg-6">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="val-phoneus"
-                          name="val-phoneus"
-                          placeholder="212-999-0000"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <div class="col-lg-8">
-                        <div class="form-material">
-                          <input
-                            type="text"
-                            class="js-datepicker form-control"
-                            id="example-datepicker4"
-                            name="example-datepicker4"
-                            data-week-start="1"
-                            data-autoclose="true"
-                            data-today-highlight="true"
-                            data-date-format="yy/mm/dd"
-                            placeholder="yy/mm/dd"
-                          />
-                          <label for="example-datepicker4">Choose a date</label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label"
-                        ><a
-                          data-toggle="modal"
-                          data-target="#modal-terms"
-                          href="#"
-                          >Terms &amp; Conditions</a
-                        >
-                        <span class="text-danger">*</span></label
-                      >
-                      <div class="col-lg-8">
-                        <label
-                          class="css-control css-control-primary css-checkbox"
-                          for="val-terms"
-                        >
-                          <input
-                            type="checkbox"
-                            class="css-control-input"
-                            id="val-terms"
-                            name="val-terms"
-                            value="1"
-                          />
-                          <span class="css-control-indicator"></span> I agree to
-                          the terms
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-lg-8 ml-auto">
-                        <button type="submit" class="btn btn-alt-primary">
-                          Submit
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1378,31 +1353,6 @@
         <!-- END Page Content -->
       </main>
       <!-- END Main Container -->
-
-      <!-- Footer -->
-      <footer id="page-footer" class="opacity-0">
-        <div class="content py-20 font-size-xs clearfix">
-          <div class="float-right">
-            Crafted with <i class="fa fa-heart text-pulse"></i> by
-            <a
-              class="font-w600"
-              href="https://1.envato.market/ydb"
-              target="_blank"
-              >pixelcave</a
-            >
-          </div>
-          <div class="float-left">
-            <a
-              class="font-w600"
-              href="https://1.envato.market/95j"
-              target="_blank"
-              >Codebase 3.1</a
-            >
-            &copy; <span class="js-year-copy"></span>
-          </div>
-        </div>
-      </footer>
-      <!-- END Footer -->
     </div>
     <!-- END Page Container -->
 
@@ -1438,6 +1388,9 @@
     <script src="public/assets/js/plugins/slick/slick.min.js"></script>
 
     <!-- Page JS Code -->
+
+    <script src="public/assets/js/custom/addExpense.js"></script>
+
     <script src="public/assets/js/pages/be_pages_dashboard.min.js"></script>
   </body>
 </html>

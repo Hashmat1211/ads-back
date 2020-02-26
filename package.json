@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Hashmat1211/office-financial-app#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "date-fns": "^2.9.0",
     "express": "^4.17.1",
     "http-status-codes": "^1.4.0",
     "moment": "^2.24.0",

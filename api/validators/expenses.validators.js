@@ -6,7 +6,10 @@ const httpsStatus = require('http-status-codes')
 const addExpenseValidator = (req, res, next) => {
     try {
         const errors = {};
-        const { type, amount, payee, date } = req.body;
+        const { type, payee, date } = req.body;
+        let { amount } = req.body;
+        amount = Number(amount)
+
 
         // validation for type in req.body
         if (isEmpty(type)) {

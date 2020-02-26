@@ -4,6 +4,7 @@ const httpsStatus = require('http-status-codes')
 const addDeveloperValidator = (req, res, next) => {
     try {
         const errors = {};
+        console.log(req.body)
         const { name } = req.body;
 
         // validation for name in req.body

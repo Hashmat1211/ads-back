@@ -1,6 +1,5 @@
 const Income = require('../schemas/income');
 const httpsStatus = require('http-status-codes');
-const moment = require('moment');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 const addNewIncome = async (incomeObj) => {
@@ -97,7 +96,16 @@ const getIncomeByEndDate = async (endDate) => {
 }
 const getIncomeByDeveloper = async (developer) => {
     try {
-        return await Income.findOne({ developer }).lean().select(`_id amount developer project client hours startDate endDate`);
+        return await Income.aggregate([{
+            $match: { $and: [{ developer: developer }] },
+        }, {
+            $group: {
+                _id: null,
+                total: {
+                    $sum: "$amount"
+                }
+            }
+        }]);
     } catch (error) {
         console.log('error in getting income by name ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -141,12 +149,6 @@ const getIncomeByDifferentParameters = async (searchData) => {
         }
 
         const result = await Income.find(conditionObj).lean().select(`-__v`);
-
-        const obj = {
-            total_Amount: result.reduce((sum, { amount }) => sum + amount, 0)
-        }
-
-        result.push(obj)
 
         return result;
 

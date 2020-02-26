@@ -76,9 +76,4 @@ function deleteIncome(domId, income_id) {
         error: function (result) { console.log('result ', result) }
     });
     viewIncomesDataTo();
-
-}
-
-function updateIncome(income_id) {
-
 }

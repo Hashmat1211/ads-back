@@ -98,6 +98,18 @@ app.get("/viewExpenses.html", (req, res) => {
 app.get("/updateIncome.html/:id", (req, res) => {
   res.sendFile(path + 'updateIncome.html');
 });
+app.get("/updateProject.html/:id", (req, res) => {
+  res.sendFile(path + 'updateProject.html');
+});
+app.get("/updateExpense.html/:id", (req, res) => {
+  res.sendFile(path + 'updateExpense.html');
+});
+app.get("/updateDeveloper.html/:id", (req, res) => {
+  res.sendFile(path + 'updateDeveloper.html');
+});
+app.get("/updateClient.html/:id", (req, res) => {
+  res.sendFile(path + 'updateClient.html');
+});
 
 /* HANDLING ERROR MIDDLEWARES */
 

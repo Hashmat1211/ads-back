@@ -13,6 +13,6 @@ router.post("/search", expensesValidator.searchExpenseValidator, expensesControl
 router.patch("/update/:expenseId", expensesValidator.updateExpenseValidator, expensesController.updateExpense);
 router.delete("/delete/:expenseId", expensesValidator.deleteExpenseValidator, expensesController.deleteExpense);
 router.get("/getAllExpenses", expensesController.getAllExpenses);
-//TODO: get single expense has been removed
+router.get('/getSingleExpense/:expenseId', expensesController.getExpenseById)
 
 module.exports = router;

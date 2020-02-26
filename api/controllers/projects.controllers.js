@@ -63,7 +63,7 @@ const deleteProject = async (req, res) => {
     }
 }
 
-const getAllProject = async (req, res) => {
+const getAllProjects = async (req, res) => {
     try {
         const projects = await ProjectModel.getAllProjects();
         if (projects.length === 0) {
@@ -126,7 +126,7 @@ module.exports = {
     addNewProject,
     updateProject,
     deleteProject,
-    getAllProject,
+    getAllProjects,
     getProjectById,
     getProjectIdByProjectName
 }

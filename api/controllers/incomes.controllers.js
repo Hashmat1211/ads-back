@@ -91,8 +91,11 @@ const getAllIncomes = async (req, res) => {
                 message: 'there is no content'
             })
         }
+        const obj = {
+            total_Amount: incomes.reduce((sum, { amount }) => sum + amount, 0)
+        }
         res.status(httpsStatus.OK).send({
-            'totalIncomes': incomes.length,
+            totalIncomes: obj.total_Amount,
             incomes
         })
     } catch (error) {
@@ -146,6 +149,7 @@ const getIncomeByClientId = async (req, res) => {
 const searchIncomes = async (req, res) => {
     try {
         const searchData = req.body;
+        console.log(searchData)
         const incomes = await IncomeModel.getIncomeByDifferentParameters(searchData);
         // console.log('incomes ... @ === ', incomes)
         if (incomes.length <= 0) {
@@ -153,8 +157,11 @@ const searchIncomes = async (req, res) => {
                 message: 'there is no content'
             })
         }
+        const obj = {
+            total_Amount: incomes.reduce((sum, { amount }) => sum + amount, 0)
+        }
         res.status(httpsStatus.OK).json({
-            'total': incomes.length,
+            'total': obj.total_Amount,
             'Income': incomes
         })
     } catch (error) {

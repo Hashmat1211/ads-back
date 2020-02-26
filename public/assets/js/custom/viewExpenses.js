@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     // console.log($('#val-username').val) 
-    console.log('document is ready')
+    console.log('document expense update is ready')
     viewExpensesDataTo();
 })
 function viewExpensesDataTo() {
@@ -10,46 +10,62 @@ function viewExpensesDataTo() {
 
     $.get("/expenses/getAllExpenses", function (data) {
         console.log('data in expenses', data)
+        let rows = '';
         const expenses = data.expenses;
         $('#allExpenses').html(data.totalExpenses)
         $.each(expenses, function (i, v) {
             console.log(i, v)
-            $('#expensesTable >tbody:last-child')
-                .append('<tr>').append(` <td>
-                <a
-                    class="font-w600"
-                    href="be_pages_ecom_project_edit.html"
-                >${v._id}</a
-                >
-            </td>`)
-                .append(`<td class="d-none d-sm-table-cell">
+
+
+            rows += `<tr id="${i}" role='row' class='odd'>`;
+            rows += ` <td>
+            <a
+                class="font-w600" 
+            >${v.date}</a
+            >
+        </td>
+        <td class="d-none d-sm-table-cell">
                 <span class="badge badge-success">${v.type}</span>
-            </td>`)
-                .append(`<td class="d-none d-sm-table-cell">
+        </td>
+         <td class="d-none d-sm-table-cell">
                 <span>${v.payee}</span>
-            </td>`)
-                .append(` <td class="d-none d-sm-table-cell">
-                ${v.date}
-        </td>`)
-                .append(` <td>
-                <a href="be_pages_ecom_project_edit.html">${v.details}</a>
-            </td>`)
-                .append(` <td class="text-center">
-                <span class="text-black">${v.amount}</span>
-            </td>`)
-                .append(`<td class="text-center">
+        </td> 
+         
+        <td>
+            <a >${v.details}</a>
+        </td>
+        <td>
+        <a >${v.amount}</a>
+    </td> 
+         
+        <td class="text-center">
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit">
+                <button  onclick="document.location.href='updateExpense.html/${v._id}';" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pencil"></i>
                 </button>
-                <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Delete">
+                <button onClick='deleteExpenses(${i},"${v._id}")' type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Delete">
                     <i class="fa fa-times"></i>
                 </button>
             </div>
-        </td>`)
-                .append('<tr>');
+        </td>
+        </tr>`;
         });
+        $('#data').append(rows)
     });
+}
+
+function deleteExpenses(domId, income_id) {
+    // alert(id) 
+    $(`#${domId}`).remove();
+    $.ajax({
+        url: `http://localhost:5000/expenses/delete/${income_id}`,
+        type: 'DELETE',  //<-----this should have to be an object.
+        contentType: 'application/json',  // <---add this
+        dataType: 'text',                // <---update this
+        success: function (result) { console.log('result ', result) },
+        error: function (result) { console.log('result ', result) }
+    });
+    viewIncomesDataTo();
 }
 
 

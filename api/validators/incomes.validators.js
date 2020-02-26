@@ -185,8 +185,10 @@ const searchIncomeValidator = (req, res, next) => {
     try {
         const errors = {};
 
+        console.log(req.body)
         const { developer, amount, client, hours, project, startDate, endDate } = req.body;
-
+        console.log('startDate ', startDate)
+        console.log('endDate ', endDate)
         if (developer && !isValidObjectId(developer)) {
             errors["developer"] = "developer Id should be valid object id.";
         } else if (client && !isValidObjectId(client)) {

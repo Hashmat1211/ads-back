@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/add", projectsValidator.addProjectValidator, projectsController.addNewProject);
 router.patch("/update/:projectId", projectsValidator.updateProjectValidator, projectsController.updateProject);
 router.delete("/delete/:projectId", projectsValidator.deleteProjectValidator, projectsController.deleteProject);
-router.get("/getAllProjects", projectsController.getAllProject);
+router.get("/getAllProjects", projectsController.getAllProjects);
 router.get("/getSingleProject/:projectId", projectsValidator.getProjectByIdValidator, projectsController.getProjectById);
 router.post('/getProjectIdByProjectName/', projectsController.getProjectIdByProjectName);
 

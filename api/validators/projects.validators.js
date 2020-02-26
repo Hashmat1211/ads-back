@@ -35,6 +35,7 @@ const addProjectValidator = (req, res, next) => {
 const updateProjectValidator = (req, res, next) => {
     try {
         const errors = {};
+        console.log('update project \n ', req.body)
 
         const { name } = req.body;
         const { projectId } = req.params;

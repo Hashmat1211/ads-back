@@ -7,53 +7,69 @@ $(document).ready(function () {
 })
 function viewClientsDataTo() {
     // 
-
+    let rows = '';
     $.get("/clients/getAllClients", function (data) {
         console.log('data ', data)
         const clients = data.clients;
         $('#allClients').html(data.totalClients)
         $.each(clients, function (i, v) {
             console.log(i, v)
-            $('#clientsTable >tbody:last-child')
-                .append('<tr>').append(` <td>
-                <a
-                    class="font-w600"
-                    href="be_pages_ecom_project_edit.html"
-                >${v._id}</a
-                >
-            </td>`)
-                .append(`<td class="d-none d-sm-table-cell">
+
+            rows += `<tr id="${i}" role='row' class='odd'>`;
+            rows += ` <td>
+            <a
+                class="font-w600" 
+            >${v._id}</a
+            >
+        </td>
+        <td class="d-none d-sm-table-cell">
                 <span class="badge badge-success">${v.email}</span>
-            </td>`)
-                .append(`<td class="d-none d-sm-table-cell">
+        </td>
+         <td class="d-none d-sm-table-cell">
                 <span>${v.name}</span>
-            </td>`)
-                .append(` <td class="d-none d-sm-table-cell">
+        </td> 
+        <td class="d-none d-sm-table-cell">
                 ${v.date}
-        </td>`)
-                .append(` <td>
-                <a href="be_pages_ecom_project_edit.html">${v.details}</a>
-            </td>`)
-                .append(` <td class="text-center">
-                <span class="text-black">${v.amount}</span>
-            </td>`)
-                .append(`<td class="text-center">
+        </td>
+        <td>
+            <a >${v.details}</a>
+        </td>
+         
+        <td class="text-center">
+                <span class="text-black">${v.valueGenerated}</span>
+        </td>
+        
+        <td class="text-center">
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit">
+                <button  onclick="document.location.href='updateClient.html/${v._id}';" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pencil"></i>
                 </button>
-                <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Delete">
+                <button onClick='deleteClient(${i},"${v._id}")' type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Delete">
                     <i class="fa fa-times"></i>
                 </button>
             </div>
-        </td>`)
-                .append('<tr>');
+        </td>
+        </tr>`;
         });
+        $('#data').append(rows);
+
     });
 }
 
+function deleteClient(domId, income_id) {
+    // alert(id) 
+    $(`#${domId}`).remove();
+    $.ajax({
+        url: `http://localhost:5000/clients/delete/${income_id}`,
+        type: 'DELETE',  //<-----this should have to be an object.
+        contentType: 'application/json',  // <---add this
+        dataType: 'text',                // <---update this
+        success: function (result) { console.log('result ', result) },
+        error: function (result) { console.log('result ', result) }
+    });
+    viewIncomesDataTo();
 
-
+}
 
 
 

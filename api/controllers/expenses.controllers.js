@@ -16,7 +16,8 @@ const addNewExpense = async (req, res) => {
                 date
             }
             console.log('ex ', prepObj)
-            await ExpenseModel.addNewExpense(prepObj);
+            const newExpense = await ExpenseModel.addNewExpense(prepObj);
+            console.log('new Expense ', newExpense)
 
             res.status(httpsStatus.CREATED).send({
                 message: 'Content created'
@@ -86,8 +87,11 @@ const getAllExpenses = async (req, res) => {
                 message: 'there is no content'
             })
         }
+        const obj = {
+            total_Amount: expenses.reduce((sum, { amount }) => sum + amount, 0)
+        }
         res.status(httpsStatus.OK).send({
-            totalExpenses: expenses.length,
+            totalExpenses: obj.total_Amount,
             expenses
         })
     } catch (error) {
@@ -107,6 +111,7 @@ const getExpenseById = async (req, res) => {
                 message: 'there is no content'
             })
         }
+        console.log('expense', expense)
         res.status(httpsStatus.OK).send({
             expense
         })
@@ -128,8 +133,12 @@ const searchExpense = async (req, res) => {
                 message: 'there is no content'
             })
         }
+        const obj = {
+            total_Amount: expenses.reduce((sum, { amount }) => sum + amount, 0)
+        }
+        console.log('expenses ', expenses)
         res.status(httpsStatus.OK).json({
-            'total': expenses.length,
+            'total': obj.total_Amount,
             'Expense': expenses
         })
     } catch (error) {

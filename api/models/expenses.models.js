@@ -105,11 +105,7 @@ const getExpenseByDifferentParameters = async (searchData) => {
 
         const result = await Expense.find(conditionObj).select(`-__v`);
 
-        const obj = {
-            total_Amount: result.reduce((sum, { amount }) => sum + amount, 0)
-        }
 
-        result.push(obj)
 
         return result;
 
