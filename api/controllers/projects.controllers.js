@@ -4,10 +4,14 @@ const httpsStatus = require('http-status-codes');
 
 const addNewProject = async (req, res) => {
     try {
-        const name = req.body.name;
+        const { status, amount, details, date, name } = req.body;
         const prepObj = {
             _id: mongoose.Types.ObjectId(),
-            name
+            name,
+            status,
+            amount,
+            details,
+            date
         }
         await ProjectModel.addNewProject(prepObj);
 
@@ -26,9 +30,9 @@ const addNewProject = async (req, res) => {
 const updateProject = async (req, res) => {
     try {
         const id = req.params.projectId
-        const name = req.body.name;
+        const prepObj = { ...req.body };
 
-        const project = await ProjectModel.updateProject(id, name);
+        const project = await ProjectModel.updateProject(id, prepObj);
 
         if (!project) {
             console.log('project not found');

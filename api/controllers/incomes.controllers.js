@@ -151,13 +151,11 @@ const searchIncomes = async (req, res) => {
         const searchData = req.body;
         console.log(searchData)
         const incomes = await IncomeModel.getIncomeByDifferentParameters(searchData);
-        console.log('incomes ... @ === ', incomes)
         if (incomes.length <= 0) {
             return res.status(httpsStatus.NO_CONTENT).json({
                 message: 'there is no content'
             })
         }
-        console.log('incomes ... ')
         console.log(incomes)
         const obj = {
             total_Amount: incomes.reduce((sum, { amount }) => sum + amount, 0)

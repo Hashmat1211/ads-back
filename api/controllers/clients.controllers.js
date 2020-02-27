@@ -4,12 +4,16 @@ const httpsStatus = require('http-status-codes');
 
 const addNewClient = async (req, res) => {
     try {
-        const name = req.body.name;
-        const contact = req.body.contact;
+
+        const { name, email, contact, details, website } = req.body.name;
         const prepObj = {
             _id: mongoose.Types.ObjectId(),
             name,
-            contact
+            contact,
+            email,
+            details,
+            website
+
         }
         await ClientModel.addNewClient(prepObj);
 
@@ -27,6 +31,7 @@ const addNewClient = async (req, res) => {
 
 const updateClient = async (req, res) => {
     try {
+
         const id = req.params.clientId
         const prepObj = { ...req.body };
         const client = await ClientModel.updateClient(id, prepObj);
@@ -123,6 +128,7 @@ const getClientIdByClientName = async (req, res) => {
 }
 
 module.exports = {
+
     addNewClient,
     updateClient,
     deleteClient,

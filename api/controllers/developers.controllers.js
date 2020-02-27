@@ -4,10 +4,14 @@ const httpsStatus = require('http-status-codes');
 
 const addNewDeveloper = async (req, res) => {
     try {
-        const name = req.body.name;
+        const { name, email, details, salary, contact } = req.body.name;
         const prepObj = {
             _id: mongoose.Types.ObjectId(),
-            name
+            name,
+            email,
+            details,
+            salary,
+            contact
         }
         await DeveloperModel.addNewDeveloper(prepObj);
 
@@ -26,9 +30,9 @@ const addNewDeveloper = async (req, res) => {
 const updateDeveloper = async (req, res) => {
     try {
         const id = req.params.developerId
-        const name = req.body.name;
+        const prepObj = { ...req.body };
 
-        const developer = await DeveloperModel.updateDeveloper(id, name);
+        const developer = await DeveloperModel.updateDeveloper(id, prepObj);
 
         if (!developer) {
             console.log('developer not found');

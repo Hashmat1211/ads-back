@@ -4,8 +4,7 @@ const httpsStatus = require('http-status-codes');
 
 const addNewExpense = async (req, res) => {
     try {
-        const name = req.body.name;
-        const { type, amount, payee } = req.body;
+        const { type, amount, payee, details } = req.body;
         let date = new Date(`${req.body.date} GMT`); //TODO: date day should be plus one every time
         if (date instanceof Date && !isNaN(date.valueOf())) {
             const prepObj = {
@@ -13,11 +12,10 @@ const addNewExpense = async (req, res) => {
                 type,
                 amount,
                 payee,
-                date
+                date,
+                details
             }
-            console.log('ex ', prepObj)
             const newExpense = await ExpenseModel.addNewExpense(prepObj);
-            console.log('new Expense ', newExpense)
 
             res.status(httpsStatus.CREATED).send({
                 message: 'Content created'
