@@ -11,6 +11,17 @@ const clientSchema = mongoose.Schema({
     contact: {
         type: String,
         required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    details: {
+        type: String,
+        required: true
+    },
+    website: {
+        type: String
     }
 });
 

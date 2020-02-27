@@ -1,11 +1,11 @@
-const { isEmpty, isString, isValidObjectId } = require('../../utils/custom.validator')
+const { isEmpty, isString, isValidObjectId, isNumber } = require('../../utils/custom.validator')
 const httpsStatus = require('http-status-codes')
 
 const addDeveloperValidator = (req, res, next) => {
     try {
         const errors = {};
         console.log(req.body)
-        const { name } = req.body;
+        const { name, email, details, salary, contact } = req.body;
 
         // validation for name in req.body
         if (isEmpty(name)) {
@@ -13,6 +13,38 @@ const addDeveloperValidator = (req, res, next) => {
 
         } else if (!isString(name)) {
             errors.name = 'Should be a valid string';
+        }
+
+        // validation for email in req.body
+        if (isEmpty(email)) {
+            errors.email = 'email is required.';
+
+        } else if (!isEmail(email)) {
+            errors.email = 'Should be a valid string';
+        }
+
+        // validation for details in req.body
+        if (isEmpty(details)) {
+            errors.details = 'details is required.';
+
+        } else if (!isString(details)) {
+            errors.details = 'Should be a valid string';
+        }
+
+        // validation for contact in req.body
+        if (isEmpty(contact)) {
+            errors.contact = 'contact is required.';
+
+        } else if (!validatePhone(contact)) {
+            errors.contact = 'Should be a valid Number';
+        }
+
+        // validation for salary in req.body
+        if (isEmpty(salary)) {
+            errors.salary = 'salary is required.';
+
+        } else if (!isNumber(salary)) {
+            errors.salary = 'Should be a valid Number';
         }
 
         if (Object.keys(errors).length > 0) {

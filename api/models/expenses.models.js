@@ -98,10 +98,12 @@ const getExpenseByDifferentParameters = async (searchData) => {
             let date = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
             conditionObj['date'] = { $gt: date };
         } else if (searchData.endDate && searchData.startDate) {
+            console.log('here ')
             let startdate = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
             let endDate = new Date(new Date(searchData.endDate).setHours(00, 00, 00));
-            conditionObj['date'] = { $lte: endDate, $gt: startdate }
+            conditionObj['date'] = { $gt: startdate, $lte: endDate }
         }
+
 
         const result = await Expense.find(conditionObj).select(`-__v`);
 

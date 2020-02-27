@@ -51,13 +51,17 @@ function getReportsFromDB() {
 }
 
 function getReport() {
+    $('#expensesTable tr').remove();
+
+    let expensesRows = '';
+    let incomesRows = '';
 
     let startDate = $('#startDate').val();
 
     let endDate = $('#endDate').val();
 
 
-    /* getting by given date in a month */
+
     $.post("incomes/search",
         {
             startDate: `${startDate}`,
@@ -65,8 +69,9 @@ function getReport() {
         }
         ,
         function (data, status) {
+
             if (!data) {
-                $('#totalIncome').html(0)
+                $('#totalIncome').html(0);
                 $.post("expenses/search",
                     {
                         startDate: `${startDate}`,
@@ -80,16 +85,71 @@ function getReport() {
                             getTotalRevenue(0, 0);
                             return;
                         }
+
                         const expense = data.total;
-                        console.log(expense)
+                        const expenseList = data.expenses;
+                        console.log('expense list ', expenseList)
+                        $.each(expenseList, function (i, v) {
+                            console.log(i, v)
+                            expensesRows += `<tr  role='row' class='odd'>`;
+                            expensesRows += ` <td>
+                        <a
+                            class="font-w600"
+                        >${v.date}</a
+                        >
+                        </td >
+                            <td class="d-none d-sm-table-cell">
+                                <span class="">${v.type}</span>
+                            </td>
+                            <td class="d-none d-sm-table-cell">
+                                <span>${v.payee}</span>
+                            </td>
+                            <td >
+                                ${v.amount}
+                            </td>
+                            <td>
+                                ${v.details}
+                            </td>
+                            </tr>`
+                        })
+                        $('#expensesTable').append(expensesRows)
+
                         $('#totalExpense').html(expense);
                         getTotalRevenue(expense, 0);
                     });
                 return;
             }
             const income = data.total;
-            console.log(income)
+            const incomesList = data.incomes
+            console.log('incomesList ', incomesList)
+
+            $.each(incomesList, function (i, v) {
+                incomesRows += `<tr   role='row' class='odd'>`;
+                incomesRows += `
+                    <td class="text-center">
+                    <span class="text-black">${v.amount}</span>
+                    </td>
+                    <td class="d-none d-sm-table-cell">
+                            <span class="">${v.hours}</span>
+                    </td>
+                    
+                     
+                    <td class="text-center">
+                            <span class="text-black">${v.details}</span>
+                    </td>
+                    <td class="text-center">
+                            <span class="text-black">${v.startDate}</span>
+                    </td>
+                    <td class="text-center">
+                            <span class="text-black">${v.endDate}</span>
+                    </td>
+                    
+                     
+                    </tr>`;
+            });
+
             $('#totalIncome').html(income)
+            $('#incomesTable').append(incomesRows);
             $.post("expenses/search",
                 {
                     startDate: `${startDate}`,
@@ -103,10 +163,42 @@ function getReport() {
                         getTotalRevenue(0, income);
                         return;
                     }
-                    const expense = data.total;
-                    console.log(expense)
-                    $('#totalExpense').html(expense);
-                    getTotalRevenue(expense, income);
+
+
+                    const expenseList = data.expenses;
+                    console.log('expense list ', expenseList)
+                    $.each(expenseList, function (i, v) {
+                        console.log(i, v)
+
+                        expensesRows += `<tr  role='row' class='odd'>`;
+                        expensesRows += ` <td>
+ 
+                            <a
+                                class="font-w600"
+                            >${v.date}</a
+                            >
+                            </td >
+                            <td class="d-none d-sm-table-cell">
+                                <span class="">${v.type}</span>
+                            </td>
+                            <td class="d-none d-sm-table-cell">
+                                <span>${v.payee}</span>
+                            </td>
+                            <td >
+                                ${v.amount}
+                            </td>
+                            <td>
+                                ${v.details}
+                            </td>
+                            </tr>`
+                    })
+                    $('#expensesTable').append(expensesRows);
+                    $('#incomesTable').append(incomesRows);
+                    const totalExpense = data.total;
+                    console.log(incomesRows)
+                    $('#totalExpense').html(totalExpense);
+                    getTotalRevenue(totalExpense, income);
+
                 });
 
         });
@@ -136,54 +228,3 @@ function getTotalRevenue(expenses, incomes) {
 }
 
 
-/* put data into tables */
-
-function viewExpensesDataTo() {
-    // 
-
-    $.get("/expenses/getAllExpenses", function (data) {
-        console.log('data in expenses', data)
-        let rows = '';
-        const expenses = data.expenses;
-        $.each(expenses, function (i, v) {
-            console.log(i, v)
-
-
-            rows += `<tr id="${i}" role='row' class='odd'>`;
-            rows += ` <td>
-            <a
-                class="font-w600" 
-            >${v._id}</a
-            >
-        </td>
-        <td class="d-none d-sm-table-cell">
-                <span class="badge badge-success">${v.type}</span>
-        </td>
-         <td class="d-none d-sm-table-cell">
-                <span>${v.payee}</span>
-        </td> 
-        <td class="d-none d-sm-table-cell">
-                ${v.date}
-        </td>
-        <td>
-            <a >${v.details}</a>
-        </td>
-        <td>
-        <a >${v.amount}</a>
-    </td> 
-         
-        <td class="text-center">
-            <div class="btn-group">
-                <button  onclick="document.location.href='updateExpense.html/${v._id}';" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit">
-                    <i class="fa fa-pencil"></i>
-                </button>
-                <button onClick='deleteExpenses(${i},"${v._id}")' type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Delete">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
-        </td>
-        </tr>`;
-        });
-        $('#data').append(rows)
-    });
-}

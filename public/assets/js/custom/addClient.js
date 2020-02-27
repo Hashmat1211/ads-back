@@ -6,7 +6,9 @@ $(document).ready(function () {
 function addClient() {
     console.log('inside add client');
     var data = $('#addClient').serialize();
-    alert(data)
-    $.post("clients/add", data
+    $.post("clients/add", data, function (data) {
+
+        window.location.href = "viewClients.html";
+    }
     );
 }

@@ -975,42 +975,6 @@
         </div>
         <!-- END Header Content -->
 
-        <!-- Header Search -->
-        <div id="page-header-search" class="overlay-header">
-          <div class="content-header content-header-fullrow">
-            <form action="be_pages_generic_search.html" method="post">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <!-- Close Search Section -->
-                  <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-toggle="layout"
-                    data-action="header_search_off"
-                  >
-                    <i class="fa fa-times"></i>
-                  </button>
-                  <!-- END Close Search Section -->
-                </div>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search or hit ESC.."
-                  id="page-header-search-input"
-                  name="page-header-search-input"
-                />
-                <div class="input-group-append">
-                  <button type="submit" class="btn btn-secondary">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <!-- END Header Search -->
-
         <!-- Header Loader -->
         <!-- Please check out the Activity page under Elements category to see examples of showing/hiding it -->
         <div id="page-header-loader" class="overlay-header bg-primary">
@@ -1231,23 +1195,39 @@
               >
                 <div class="block-content block-content-full">
                   <div class="row py-20">
-                    <div class="col-6 text-right border-r">
-                      <table class="table table-borderless table-striped">
+                    <div class="col-6  border-r">
+                      <table
+                        class="table table-borderless table-striped"
+                        style="display:  block;
+                        table-layout: auto;
+                  overflow-x: auto; 
+                  white-space: nowrap;"
+                      >
                         <thead
                           style="background-color: chocolate; color: cornsilk; font-weight: 600;"
                         >
                           <tr>
-                            <th class="d-none d-sm-table-cell">Date</th>
-                            <th class="d-none d-sm-table-cell">Type</th>
-                            <th class="d-none d-sm-table-cell">Payee</th>
-                            <th class="d-none d-sm-table-cell">Details</th>
-                            <th class="text-center">Amount</th>
-                            <th class="text-center" style="width: 100px;">
-                              Actions
+                            <th class="d-none d-sm-table-cell text-left">
+                              Date
+                            </th>
+                            <th class="d-none d-sm-table-cell text-left">
+                              Type
+                            </th>
+                            <th class="d-none d-sm-table-cell text-left">
+                              Payee
+                            </th>
+                            <th class="d-none d-sm-table-cell text-left">
+                              Amount
+                            </th>
+                            <th class="d-none d-sm-table-cell text-left">
+                              Details
                             </th>
                           </tr>
                         </thead>
-                        <tbody id="expensesTable"></tbody>
+                        <tbody
+                          id="expensesTable"
+                          style="background-color: rgb(179, 174, 174)"
+                        ></tbody>
                       </table>
                       <div
                         class="invisible"
@@ -1266,9 +1246,10 @@
                       </div>
                     </div>
                     <div class="col-6">
-                      <table 
+                      <table
                         class="table table-borderless table-striped"
                         style="display:  block;
+                        table-layout: auto;
                   overflow-x: auto; 
                   white-space: nowrap;"
                       >
@@ -1278,20 +1259,13 @@
                           <tr>
                             <th class="text-center">Value</th>
                             <th class="d-none d-sm-table-cell">Hours</th>
-                            <th class="d-none d-sm-table-cell">Developer</th>
-                            <th class="d-none d-sm-table-cell">Client</th>
-                            <th class="d-none d-sm-table-cell">Project</th>
                             <th class="d-none d-sm-table-cell">Details</th>
                             <th class="d-none d-sm-table-cell">Start Date</th>
                             <th class="d-none d-sm-table-cell">End Date</th>
-
-                            <th class="text-center" style="width: 100px;">
-                              Actions
-                            </th>
                           </tr>
                         </thead>
                         <tbody
-                          id="incomesTable
+                          id="incomesTable"
                           style="background-color: darkgrey;"
                         ></tbody>
                       </table>

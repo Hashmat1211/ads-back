@@ -16,7 +16,6 @@ function viewExpensesDataTo() {
         $.each(expenses, function (i, v) {
             console.log(i, v)
 
-
             rows += `<tr id="${i}" role='row' class='odd'>`;
             rows += ` <td>
             <a
@@ -30,13 +29,13 @@ function viewExpensesDataTo() {
          <td class="d-none d-sm-table-cell">
                 <span>${v.payee}</span>
         </td> 
-         
-        <td>
-            <a >${v.details}</a>
-        </td>
-        <td>
-        <a >${v.amount}</a>
+        <td >
+        ${v.amount} 
     </td> 
+        <td>
+            ${v.details} 
+        </td>
+        
          
         <td class="text-center">
             <div class="btn-group">

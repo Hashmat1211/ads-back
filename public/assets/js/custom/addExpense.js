@@ -19,7 +19,9 @@ function addExpense() {
     }
     console.log('prep ', prepObj)
 
-    $.post("expenses/add", prepObj
+    $.post("expenses/add", prepObj, function (data) {
+        window.location.href = "viewExpenses.html";
+    }
     );
 
 }

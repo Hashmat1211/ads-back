@@ -20,6 +20,10 @@ const expenseSchema = mongoose.Schema({
         type: Date,
         required: true
     },
+    details: {
+        type: String,
+        required: true
+    }
 });
 
 // exporting schema

@@ -139,7 +139,7 @@ const searchExpense = async (req, res) => {
         console.log('expenses ', expenses)
         res.status(httpsStatus.OK).json({
             'total': obj.total_Amount,
-            'Expense': expenses
+            'expenses': expenses
         })
     } catch (error) {
         console.log('error in searching new expense ', error)

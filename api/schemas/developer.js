@@ -7,6 +7,22 @@ const projectSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    details: {
+        type: String,
+        required: true
+    },
+    salary: {
+        type: Number,
+        required: true
+    },
+    contact: {
+        type: String,
+        required: true
     }
 });
 

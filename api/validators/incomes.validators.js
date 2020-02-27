@@ -5,8 +5,9 @@ const addIncomeValidator = (req, res, next) => {
     try {
         const errors = {};
         console.log('req.body ', JSON.stringify(req.body))
-        const { developer, amount, client, hours, project, startDate, endDate } = req.body;
-
+        const { developer, client, project, details, startDate, endDate } = req.body;
+        let { amount, hours } = req.body;
+        amount = Number(amount)
 
         // validation for name in req.body
         if (isEmpty(Number(amount))) {
@@ -14,6 +15,14 @@ const addIncomeValidator = (req, res, next) => {
 
         } else if (!isNumber(Number(amount))) {
             errors.amount = 'Should be a valid Number';
+        }
+
+        // validation for details in req.body
+        if (isEmpty(details)) {
+            errors.details = 'details is required.';
+
+        } else if (!isString(details)) {
+            errors.details = 'Should be a valid String';
         }
 
         // validation for payee in req.body
@@ -84,8 +93,11 @@ const updateIncomeValidator = (req, res, next) => {
     try {
         const errors = {};
         console.log('req.body in update ', JSON.stringify(req.body))
-        const { developer, amount, client, hours, project, startDate, endDate } = req.body;
+        const { developer, client, project, startDate, endDate } = req.body;
         const { incomeId } = req.params;
+
+        let { amount, hours } = req.body;
+        amount = Number(amount);
 
         // validation for id in req.params
 
@@ -186,9 +198,9 @@ const searchIncomeValidator = (req, res, next) => {
         const errors = {};
 
         console.log(req.body)
-        const { developer, amount, client, hours, project, startDate, endDate } = req.body;
-        console.log('startDate ', startDate)
-        console.log('endDate ', endDate)
+        const { developer, client, project, startDate, endDate } = req.body;
+        let { amount, hours } = req.body;
+        amount = Number(amount)
         if (developer && !isValidObjectId(developer)) {
             errors["developer"] = "developer Id should be valid object id.";
         } else if (client && !isValidObjectId(client)) {

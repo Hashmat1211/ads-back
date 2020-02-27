@@ -32,9 +32,10 @@ function addIncome() {
         "endDate": `${endDate}`
     }
 
-    $.post("incomes/add", prepObj
+    $.post("incomes/add", prepObj, function (data) {
+        window.location.href = "viewIncomes.html";
+    }
     );
-
 
 }
 

@@ -18,14 +18,9 @@ function viewDevelopersDataTo() {
 
 
             rows += `<tr id="${i}" role='row' class='odd'>`;
-            rows += ` <td>
-            <a
-                class="font-w600" 
-            >${v._id}</a
-            >
-        </td>
+            rows += ` 
         <td class="d-none d-sm-table-cell">
-                <span class="badge badge-success">${v.name}</span>
+                <span class="badge badge-success">${v.email}</span>
         </td>
          <td class="d-none d-sm-table-cell">
                 <span>${v.name}</span>
@@ -35,6 +30,9 @@ function viewDevelopersDataTo() {
         </td>
         <td>
             <a >${v.salary}</a>
+        </td>
+        <td>
+            <a >${v.website}</a>
         </td>
          
         <td class="text-center">

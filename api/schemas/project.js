@@ -7,6 +7,22 @@ const projectSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
+    },
+    amount: {
+        type: String,
+        required: true
+    },
+    details: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: String,
+        required: true
     }
 });
 

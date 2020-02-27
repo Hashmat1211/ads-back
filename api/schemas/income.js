@@ -8,6 +8,10 @@ const projectSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    details: {
+        type: String,
+        required: true
+    },
     client: {
         type: String,
         required: true

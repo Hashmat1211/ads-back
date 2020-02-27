@@ -1,11 +1,11 @@
-const { isEmpty, isString, validatePhone, isValidObjectId } = require('../../utils/custom.validator')
+const { isEmpty, isString, validatePhone, isValidObjectId, isEmail } = require('../../utils/custom.validator')
 const httpsStatus = require('http-status-codes')
 
 const addClientValidator = (req, res, next) => {
     try {
         const errors = {};
         console.log('req.body ', JSON.stringify(req.body))
-        const { name, contact } = req.body;
+        const { name, contact, email, details } = req.body;
 
         // validation for name in req.body
         if (isEmpty(name)) {
@@ -13,6 +13,22 @@ const addClientValidator = (req, res, next) => {
 
         } else if (!isString(name)) {
             errors.name = 'Should be a valid string';
+        }
+
+        // validation for email in req.body
+        if (isEmpty(email)) {
+            errors.email = 'email is required.';
+
+        } else if (!isEmail(email)) {
+            errors.email = 'Should be a valid string';
+        }
+
+        // validation for details in req.body
+        if (isEmpty(details)) {
+            errors.details = 'details is required.';
+
+        } else if (!isString(details)) {
+            errors.details = 'Should be a valid string';
         }
 
         // validation for contact in req.body

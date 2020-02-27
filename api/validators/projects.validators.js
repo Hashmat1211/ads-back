@@ -5,8 +5,9 @@ const addProjectValidator = (req, res, next) => {
     try {
         const errors = {};
         console.log('req.body ', JSON.stringify(req.body))
-        const { name, details } = req.body;
-        console.log(name, details)
+        const { name, details, status, date } = req.body;
+        let { amount } = req.body;
+        amount = Number(amount)
 
         // validation for name in req.body
         if (isEmpty(name)) {
@@ -14,6 +15,29 @@ const addProjectValidator = (req, res, next) => {
 
         } else if (!isString(name)) {
             errors.name = 'Should be a valid string';
+        }
+
+        // validation for status in req.body
+        if (isEmpty(status)) {
+            errors.status = 'status is required.';
+
+        } else if (!isString(status)) {
+            errors.status = 'Should be a valid string';
+        }
+
+        // validation for amount in req.body
+        if (isEmpty(amount)) {
+            errors.amount = 'amount is required.';
+        } else if (!isNumber(amount)) {
+            errors.amount = 'Should be a valid Amountin Numbers';
+        }
+
+        // validation for date in req.body
+        if (isEmpty(date)) {
+            errors.date = 'date is required.';
+
+        } else if (!isString(date)) {
+            errors.date = 'Should be a valid date';
         }
 
         if (Object.keys(errors).length > 0) {

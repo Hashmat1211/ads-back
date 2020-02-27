@@ -145,7 +145,7 @@ const getIncomeByDifferentParameters = async (searchData) => {
         } else if (searchData.endDate && searchData.startDate) {
             let startdate = new Date(new Date(searchData.startDate).setHours(00, 00, 00));
             let endDate = new Date(new Date(searchData.endDate).setHours(00, 00, 00));
-            conditionObj['endDate'] = { $lte: endDate, $gt: startdate }
+            conditionObj['endDate'] = { $lt: endDate, $gte: startdate }
         }
 
         const result = await Income.find(conditionObj).lean().select(`-__v`);
