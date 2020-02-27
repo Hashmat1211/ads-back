@@ -25,17 +25,15 @@ function viewClientsDataTo() {
         </td> 
         <td class="d-none d-sm-table-cell">
                 <span>${v.website}</span>
-        </td> 
-        <td class="d-none d-sm-table-cell">
-                ${v.date}
+        </td>  
+        <td class="text-left">
+                <span class="text-black">${v.contact}</span>
         </td>
         <td>
             <a >${v.details}</a>
         </td>
          
-        <td class="text-center">
-                <span class="text-black">${v.valueGenerated}</span>
-        </td>
+        
         
         <td class="text-center">
             <div class="btn-group">
@@ -54,18 +52,18 @@ function viewClientsDataTo() {
     });
 }
 
-function deleteClient(domId, income_id) {
+function deleteClient(domId, client_id) {
     // alert(id) 
     $(`#${domId}`).remove();
     $.ajax({
-        url: `http://localhost:5000/clients/delete/${income_id}`,
+        url: `http://localhost:5000/clients/delete/${client_id}`,
         type: 'DELETE',  //<-----this should have to be an object.
         contentType: 'application/json',  // <---add this
         dataType: 'text',                // <---update this
         success: function (result) { console.log('result ', result) },
         error: function (result) { console.log('result ', result) }
     });
-    viewIncomesDataTo();
+    viewClientsDataTo();
 
 }
 
@@ -78,32 +76,3 @@ function deleteClient(domId, income_id) {
 
 
 
-
-
-{/* <tr> 
-    <td>
-        <a
-            class="font-w600"
-            href="be_pages_ecom_project_edit.html"
-        >PID.412</a
-        >
-    </td>
-    <td class="d-none d-sm-table-cell">
-        <span class="badge badge-success">Available</span>
-    </td>
-    <td class="d-none d-sm-table-cell">
-        <span>project1</span>
-    </td>
-    <td class="d-none d-sm-table-cell">
-        2017/09/15
-</td>
-    <td>
-        <a href="be_pages_ecom_project_edit.html">Project #12</a>
-    </td>
-
-    <td class="text-center">
-        <span class="text-black">$43</span>
-    </td>
-</tr>
-
-*/}

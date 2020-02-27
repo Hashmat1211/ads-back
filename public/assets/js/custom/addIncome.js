@@ -12,14 +12,10 @@ function addIncome() {
     const amount = $('#amount').val();
     const startDate = $('#startDate').val();
     const endDate = $('#endDate').val();
-
-    const developer = $('#developer').val();;
-    console.log(developer)
+    const developer = $('#developer').val();
     const client = $('#client').val();;
-    console.log(client)
     const project = $('#project').val();
-    console.log('projectid ', project);
-
+    const details = $('#details').val();
 
 
     const prepObj = {
@@ -29,7 +25,8 @@ function addIncome() {
         "hours": hours,
         "amount": amount,
         "startDate": `${startDate}`,
-        "endDate": `${endDate}`
+        "endDate": `${endDate}`,
+        "details": `${details}`
     }
 
     $.post("incomes/add", prepObj, function (data) {

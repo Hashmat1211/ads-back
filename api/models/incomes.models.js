@@ -33,7 +33,7 @@ const deleteIncome = async (id) => {
 
 const getAllIncomes = async () => {
     try {
-        return await Income.find({}).lean().select(`_id amount developer project client hours startDate endDate`);
+        return await Income.find({}).lean().select(`_id amount developer project client hours startDate endDate details`);
     } catch (error) {
         console.log('error in getting all incomes ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -42,7 +42,7 @@ const getAllIncomes = async () => {
 
 const getIncomeById = async (id) => {
     try {
-        return await Income.findOne({ _id: id }).lean().select(`_id amount developer project client hours startDate endDate`);
+        return await Income.findOne({ _id: id }).lean().select(`_id amount developer project client hours startDate endDate details`);
     } catch (error) {
         console.log('error in getting income by id ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

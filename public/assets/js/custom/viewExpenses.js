@@ -32,7 +32,7 @@ function viewExpensesDataTo() {
         <td >
         ${v.amount} 
     </td> 
-        <td>
+        <td class="d-none d-sm-table-cell">
             ${v.details} 
         </td>
         

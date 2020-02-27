@@ -1244,7 +1244,7 @@
 
                   <div class="form-group row">
                     <label class="col-lg-4 col-form-label" for="name"
-                      >Project Name <span class="text-danger">*</span></label
+                      >Title <span class="text-danger">*</span></label
                     >
                     <div class="col-lg-8">
                       <input
@@ -1252,7 +1252,39 @@
                         class="form-control"
                         id="name"
                         name="name"
-                        placeholder="Enter a username.."
+                        placeholder="Enter project title.."
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label" for="status"
+                      >Status <span class="text-danger">*</span></label
+                    >
+                    <div class="col-lg-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="status"
+                        name="status"
+                        placeholder="Enter project status completed/pending.."
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label" for="value"
+                      >Value of the Project<span class="text-danger"
+                        >*</span
+                      ></label
+                    >
+                    <div class="col-lg-8">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="amount"
+                        name="amount"
+                        placeholder="Enter project values"
                       />
                     </div>
                   </div>
@@ -1275,32 +1307,24 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-lg-4 col-form-label"
-                      ><a
-                        data-toggle="modal"
-                        data-target="#modal-terms"
-                        href="#"
-                        >Terms &amp; Conditions</a
-                      >
-                      <span class="text-danger">*</span></label
-                    >
                     <div class="col-lg-8">
-                      <label
-                        class="css-control css-control-primary css-checkbox"
-                        for="val-terms"
-                      >
+                      <div class="form-material">
                         <input
-                          type="checkbox"
-                          class="css-control-input"
-                          id="val-terms"
-                          name="val-terms"
-                          value="1"
+                          type="text"
+                          class="js-datepicker form-control"
+                          id="date"
+                          name="date"
+                          data-week-start="1"
+                          data-autoclose="true"
+                          data-today-highlight="true"
+                          data-date-format="yy/mm/dd"
+                          placeholder="yy/mm/dd"
                         />
-                        <span class="css-control-indicator"></span> I agree to
-                        the terms
-                      </label>
+                        <label for="example-datepicker4">Choose a date</label>
+                      </div>
                     </div>
                   </div>
+
                   <div class="form-group row">
                     <div class="col-lg-8 ml-auto">
                       <button

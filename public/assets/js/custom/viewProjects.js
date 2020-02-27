@@ -15,6 +15,7 @@ function viewProjectsDataTo() {
         let rows = '';
         $.each(projects, function (i, v) {
             console.log(i, v)
+
             rows += `<tr id="${i}" role='row' class='odd'>`;
             rows += ` 
         <td class="d-none d-sm-table-cell">

@@ -13,9 +13,9 @@ const addNewProject = async (projectObj) => {
     }
 }
 
-const updateProject = async (id, name) => {
+const updateProject = async (id, updatedData) => {
     try {
-        return await Project.updateOne({ _id: id }, { name });
+        return await Project.updateOne({ _id: id }, updatedData);
     } catch (error) {
         console.log('error in updating name project ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -33,7 +33,7 @@ const deleteProject = async (id) => {
 
 const getAllProjects = async () => {
     try {
-        return await Project.find({}).lean().select(`_id name`);
+        return await Project.find({}).lean().select(`_id name status date amount details`);
     } catch (error) {
         console.log('error in getting all projects ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -42,7 +42,7 @@ const getAllProjects = async () => {
 
 const getProjectById = async (id) => {
     try {
-        return await Project.findOne({ _id: id }).lean().select(`_id name`);
+        return await Project.findOne({ _id: id }).lean().select(`_id name status date amount details`);
     } catch (error) {
         console.log('error in getting project by id ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

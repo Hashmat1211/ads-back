@@ -1,11 +1,14 @@
-const { isEmpty, isString, isValidObjectId, isNumber } = require('../../utils/custom.validator')
+const { isEmpty, isString, isValidObjectId, isNumber, isEmail, validatePhone } = require('../../utils/custom.validator')
 const httpsStatus = require('http-status-codes')
 
 const addDeveloperValidator = (req, res, next) => {
     try {
         const errors = {};
-        console.log(req.body)
-        const { name, email, details, salary, contact } = req.body;
+        console.log(req.body);
+        const { name, email, details, contact } = req.body;
+        let salary = req.body.salary;
+        salary = Number(salary)
+
 
         // validation for name in req.body
         if (isEmpty(name)) {
@@ -48,6 +51,7 @@ const addDeveloperValidator = (req, res, next) => {
         }
 
         if (Object.keys(errors).length > 0) {
+            console.log('errors in validation ', errors)
             res.status(httpsStatus.BAD_REQUEST).json({
                 error: errors
             })
@@ -57,6 +61,7 @@ const addDeveloperValidator = (req, res, next) => {
         }
 
     } catch (error) {
+        console.log('error in add dev val ', error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).json({
             message: 'internal server error'
         })

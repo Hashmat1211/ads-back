@@ -357,101 +357,91 @@
                   <!-- jQuery Validation functionality is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js -->
                   <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
 
-                  <div class="form-group row">
-                    <label class="col-lg-4 col-form-label" for="name"
-                      >Developer Name <span class="text-danger">*</span></label
-                    >
-                    <div class="col-lg-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="name"
-                        name="name"
-                        placeholder="Enter a username.."
-                      />
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-lg-4 col-form-label" for="email"
-                      >Email <span class="text-danger">*</span></label
-                    >
-                    <div class="col-lg-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="email"
-                        name="email"
-                        placeholder="Your valid email.."
-                      />
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-lg-4 col-form-label" for="details"
-                      >Details <span class="text-danger">*</span></label
-                    >
-                    <div class="col-lg-8">
-                      <textarea
-                        class="form-control"
-                        id="details"
-                        name="details"
-                        rows="5"
-                        placeholder="What would you like to see?"
-                      ></textarea>
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-lg-4 col-form-label" for="contact"
-                      >Phone <span class="text-danger">*</span></label
-                    >
-                    <div class="col-lg-6">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="contact"
-                        name="contact"
-                        placeholder="0092-000-000-0000"
-                      />
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-lg-4 col-form-label"
-                      ><a
-                        data-toggle="modal"
-                        data-target="#modal-terms"
-                        href="#"
-                        >Terms &amp; Conditions</a
-                      >
-                      <span class="text-danger">*</span></label
-                    >
-                    <div class="col-lg-8">
-                      <label
-                        class="css-control css-control-primary css-checkbox"
-                        for="terms"
-                      >
-                        <input
-                          type="checkbox"
-                          class="css-control-input"
-                          id="terms"
-                          name="terms"
-                          value="1"
-                        />
-                        <span class="css-control-indicator"></span> I agree to
-                        the terms
+                  
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label" for="name"
+                        >Developer Name
                       </label>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          name="name"
+                          placeholder="Enter a username.."
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-lg-8 ml-auto">
-                      <button
-                        onclick="updateDeveloper()"
-                        class="btn btn-alt-primary"
-                      >
-                        Submit
-                      </button>
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label" for="email"
+                        >Email
+                      </label>
+                      <div class="col-lg-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="email"
+                          name="email"
+                          placeholder="Your valid email.."
+                        />
+                      </div>
                     </div>
-                  </div>
+
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label" for="details"
+                        >Details
+                      </label>
+                      <div class="col-lg-8">
+                        <textarea
+                          class="form-control"
+                          id="details"
+                          name="details"
+                          rows="5"
+                          placeholder="What would you like to see?"
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label" for="salary"
+                        >Salary
+                      </label>
+                      <div class="col-lg-6">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="salary"
+                          name="salary"
+                          placeholder="enter salary in rupees"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label" for="contact"
+                        >Phone
+                      </label>
+                      <div class="col-lg-6">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="contact"
+                          name="contact"
+                          placeholder="0092-000-000-0000"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-lg-8 ml-auto">
+                        <button
+                          onclick="updateDeveloper()"
+                          class="btn btn-alt-primary"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  
                 </div>
               </div>
             </div>

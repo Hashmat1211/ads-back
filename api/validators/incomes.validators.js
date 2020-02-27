@@ -9,6 +9,8 @@ const addIncomeValidator = (req, res, next) => {
         let { amount, hours } = req.body;
         amount = Number(amount)
 
+        console.log(`\n ${details} \n`)
+
         // validation for name in req.body
         if (isEmpty(Number(amount))) {
             errors.amount = 'amount is required.';
@@ -19,6 +21,7 @@ const addIncomeValidator = (req, res, next) => {
 
         // validation for details in req.body
         if (isEmpty(details)) {
+            console.log(`\n ${details} \n`)
             errors.details = 'details is required.';
 
         } else if (!isString(details)) {
@@ -74,6 +77,7 @@ const addIncomeValidator = (req, res, next) => {
 
         console.log(Object.keys(errors))
         if (Object.keys(errors).length > 0) {
+            console.log('errors .... ', errors)
             res.status(httpsStatus.BAD_REQUEST).json({
                 error: errors
             })
@@ -82,7 +86,7 @@ const addIncomeValidator = (req, res, next) => {
         }
 
     } catch (error) {
-        console.log(error)
+        console.log('error .... ', error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).json({
             message: 'internal server error'
         })

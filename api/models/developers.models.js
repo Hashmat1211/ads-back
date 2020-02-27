@@ -12,9 +12,9 @@ const addNewDeveloper = async (developerObj) => {
     }
 }
 
-const updateDeveloper = async (id, name) => {
+const updateDeveloper = async (id, updatedData) => {
     try {
-        return await Developer.updateOne({ _id: id }, { name });
+        return await Developer.updateOne({ _id: id }, updatedData);
     } catch (error) {
         console.log('error in updating name developer ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -32,7 +32,7 @@ const deleteDeveloper = async (id) => {
 
 const getAllDevelopers = async () => {
     try {
-        return await Developer.find({}).lean().select(`_id name`);
+        return await Developer.find({}).lean().select(`_id name contact salary details email`);
     } catch (error) {
         console.log('error in getting all developers ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -41,7 +41,7 @@ const getAllDevelopers = async () => {
 
 const getDeveloperById = async (id) => {
     try {
-        return await Developer.findOne({ _id: id }).lean().select(`_id name`);
+        return await Developer.findOne({ _id: id }).lean().select(`_id name contact salary details email`);
     } catch (error) {
         console.log('error in getting developer by id ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

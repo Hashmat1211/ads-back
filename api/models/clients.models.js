@@ -31,7 +31,7 @@ const deleteClient = async (id) => {
 
 const getAllClients = async () => {
     try {
-        return await Client.find({}).lean().select(`_id name contact`);
+        return await Client.find({}).lean().select(`_id name contact email website details`);
     } catch (error) {
         console.log('error in getting all clients ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -40,7 +40,7 @@ const getAllClients = async () => {
 
 const getClientById = async (id) => {
     try {
-        return await Client.findOne({ _id: id }).lean().select(`_id name contact`);
+        return await Client.findOne({ _id: id }).lean().select(`_id name contact email website details`);
     } catch (error) {
         console.log('error in getting client by id ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

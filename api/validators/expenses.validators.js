@@ -51,6 +51,7 @@ const addExpenseValidator = (req, res, next) => {
         }
 
         if (Object.keys(errors).length > 0) {
+            console.log(errors)
             res.status(httpsStatus.BAD_REQUEST).json({
                 error: errors
             })

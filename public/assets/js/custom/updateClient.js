@@ -13,9 +13,9 @@ $(document).ready(function () {
         const client = data.client;
         $('#email').val(client.email);
         $('#name').val(client.name);
-        $('#date').val(client.date);
+        $('#website').val(client.website);
         $('#contact').val(client.contact);
-        $('#valueGenerated').val(client.valueGenerated);
+        $('#details').val(client.details);
         //line............. 
     })
 })

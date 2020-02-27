@@ -4,7 +4,7 @@ const httpsStatus = require('http-status-codes');
 
 const addNewIncome = async (req, res) => {
     try {
-        const { amount, developer, project, client, hours } = req.body;
+        const { amount, developer, project, client, hours, details } = req.body;
         const startDate = new Date(`${req.body.startDate} GMT`);
         const endDate = new Date(`${req.body.endDate} GMT`);
         const prepObj = {
@@ -15,7 +15,8 @@ const addNewIncome = async (req, res) => {
             client,
             hours,
             startDate,
-            endDate
+            endDate,
+            details
         }
         await IncomeModel.addNewIncome(prepObj);
 

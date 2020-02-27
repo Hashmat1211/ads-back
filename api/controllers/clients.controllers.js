@@ -5,7 +5,7 @@ const httpsStatus = require('http-status-codes');
 const addNewClient = async (req, res) => {
     try {
 
-        const { name, email, contact, details, website } = req.body.name;
+        const { name, email, contact, details, website } = req.body;
         const prepObj = {
             _id: mongoose.Types.ObjectId(),
             name,

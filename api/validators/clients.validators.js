@@ -49,6 +49,7 @@ const addClientValidator = (req, res, next) => {
         }
 
     } catch (error) {
+        console.log('error ... ', error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).json({
             message: 'internal server error'
         })

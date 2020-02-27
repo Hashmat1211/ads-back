@@ -32,7 +32,7 @@ const deleteExpense = async (id) => {
 
 const getAllExpenses = async () => {
     try {
-        return await Expense.find({}).lean().select(`_id type amount payee date`);
+        return await Expense.find({}).lean().select(`_id type amount payee date details`);
     } catch (error) {
         console.log('error in getting all expenses ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')
@@ -41,7 +41,7 @@ const getAllExpenses = async () => {
 
 const getExpenseById = async (id) => {
     try {
-        return await Expense.findOne({ _id: id }).lean().select(`_id type amount payee date`);
+        return await Expense.findOne({ _id: id }).lean().select(`_id type amount payee date details`);
     } catch (error) {
         console.log('error in getting expense by id ', error);
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).send('error')

@@ -4,7 +4,7 @@ const httpsStatus = require('http-status-codes');
 
 const addNewDeveloper = async (req, res) => {
     try {
-        const { name, email, details, salary, contact } = req.body.name;
+        const { name, email, details, salary, contact } = req.body;
         const prepObj = {
             _id: mongoose.Types.ObjectId(),
             name,
@@ -129,6 +129,7 @@ const getDeveloperIdByDeveloperName = async (req, res) => {
 }
 
 module.exports = {
+
     addNewDeveloper,
     updateDeveloper,
     deleteDeveloper,

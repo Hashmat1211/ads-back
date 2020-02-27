@@ -1,4 +1,4 @@
-const { isEmpty, isString, isValidObjectId } = require('../../utils/custom.validator');
+const { isEmpty, isString, isValidObjectId, isNumber } = require('../../utils/custom.validator');
 const httpsStatus = require('http-status-codes')
 
 const addProjectValidator = (req, res, next) => {
@@ -50,6 +50,7 @@ const addProjectValidator = (req, res, next) => {
         }
 
     } catch (error) {
+        console.log('error in project validator ', error)
         res.status(httpsStatus.INTERNAL_SERVER_ERROR).json({
             message: 'internal server error'
         })
@@ -61,8 +62,9 @@ const updateProjectValidator = (req, res, next) => {
         const errors = {};
         console.log('update project \n ', req.body)
 
-        const { name } = req.body;
+        const { name, details } = req.body;
         const { projectId } = req.params;
+        console.log(req.body)
 
         // validation for id in req.params
         if (!projectId) {
@@ -75,6 +77,7 @@ const updateProjectValidator = (req, res, next) => {
 
         }
         if (Object.keys(errors).length > 0) {
+            console.log('err in validations ', errors)
             res.status(httpsStatus.BAD_REQUEST).json({
                 error: errors
             })

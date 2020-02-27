@@ -13,9 +13,9 @@ $(document).ready(function () {
         const developer = data.developer;
         $('#email').val(developer.email);
         $('#name').val(developer.name);
-        $('#date').val(developer.date);
+        $('#salary').val(developer.salary);
         $('#details').val(developer.details);
-        $('#valueGenerated').val(developer.valueGenerated);
+        $('#contact').val(developer.contact);
         //line............. 
     })
 })
@@ -27,7 +27,7 @@ function updateDeveloper() {
     var prepObj = {};
 
     if ($('#email').val()) {
-        prepObj['email'] = Number($('#email').val());
+        prepObj['email'] = $('#email').val();
     }
     if ($('#name').val()) {
         prepObj['name'] = $('#name').val();

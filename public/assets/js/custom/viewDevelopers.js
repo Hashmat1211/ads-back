@@ -20,19 +20,19 @@ function viewDevelopersDataTo() {
             rows += `<tr id="${i}" role='row' class='odd'>`;
             rows += ` 
         <td class="d-none d-sm-table-cell">
-                <span class="badge badge-success">${v.email}</span>
+                <span >${v.name}</span>
         </td>
          <td class="d-none d-sm-table-cell">
-                <span>${v.name}</span>
+                <span>${v.email}</span>
         </td> 
         <td class="d-none d-sm-table-cell">
-                ${v.date}
+                ${v.contact}
         </td>
         <td>
             <a >${v.salary}</a>
         </td>
         <td>
-            <a >${v.website}</a>
+            <a >${v.details}</a>
         </td>
          
         <td class="text-center">

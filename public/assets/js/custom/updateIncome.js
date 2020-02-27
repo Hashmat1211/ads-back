@@ -4,7 +4,6 @@ $(document).ready(function () {
     console.log('update document is ready');
     let url = window.location.pathname;
     let id = url.substring(url.lastIndexOf('/') + 1);
-    // console.log('id', typeof id)
     $.get(`/incomes/getSingleIncome/${id}`, function (data) {
         console.log('data ', data);
         if (!data) {
@@ -15,7 +14,7 @@ $(document).ready(function () {
         $('#hours').val(income.hours);
         $('#amount').val(income.amount);
         $('#startDate').val(income.startDate);
-        $('#endDate').val(income.endDate);
+        $('#details').val(income.details);
         $('#endDate').val(income.endDate);
         //line............. 
     })

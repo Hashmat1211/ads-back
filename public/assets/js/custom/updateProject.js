@@ -11,6 +11,10 @@ $(document).ready(function () {
         }
         const project = data.project;
         $('#name').val(project.name);
+        $('#details').val(project.details);
+        $('#status').val(project.status);
+        $('#date').val(project.date);
+        $('#amount').val(project.amount);
         //line............. 
     })
 })
@@ -28,7 +32,15 @@ function updateProject() {
     if ($('#details').val()) {
         prepObj['details'] = $('#details').val();
     }
-
+    if ($('#amount').val()) {
+        prepObj['amount'] = $('#amount').val();
+    }
+    if ($('#date').val()) {
+        prepObj['date'] = $('#date').val();
+    }
+    if ($('#status').val()) {
+        prepObj['status'] = $('#status').val();
+    }
 
     console.log(prepObj);
     const data = JSON.stringify(prepObj);
