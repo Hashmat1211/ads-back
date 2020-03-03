@@ -15,6 +15,8 @@ function viewProjectsDataTo() {
         let rows = '';
         $.each(projects, function (i, v) {
             console.log(i, v)
+            let date = v.date;
+            date = date.substr(0, 10);
 
             rows += `<tr id="${i}" role='row' class='odd'>`;
             rows += ` 
@@ -25,7 +27,7 @@ function viewProjectsDataTo() {
                 <span>${v.name}</span>
         </td> 
         <td class="d-none d-sm-table-cell">
-                ${v.date}
+                ${date}
         </td>
         <td>
             <a >${v.details}</a>

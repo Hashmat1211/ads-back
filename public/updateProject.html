@@ -1384,6 +1384,23 @@
     <!-- Page JS Code -->
     <script src="/public/assets/js/pages/be_pages_dashboard.min.js"></script>
 
+    <script src="public/assets/js/pages/be_forms_plugins.min.js"></script>
+
+    <script src="public/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script>
+      jQuery(function() {
+        Codebase.helpers([
+          "datepicker",
+          "colorpicker",
+          "maxlength",
+          "select2",
+          "masked-inputs",
+          "rangeslider",
+          "tags-inputs"
+        ]);
+      });
+    </script>
+
     <script src="/public/assets/js/custom/updateProject.js"></script>
   </body>
 </html>

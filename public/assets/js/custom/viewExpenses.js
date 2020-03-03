@@ -15,12 +15,14 @@ function viewExpensesDataTo() {
         $('#allExpenses').html(data.totalExpenses)
         $.each(expenses, function (i, v) {
             console.log(i, v)
+            let date = v.date;
+            date = date.substr(0, 10);
 
             rows += `<tr id="${i}" role='row' class='odd'>`;
             rows += ` <td>
             <a
                 class="font-w600" 
-            >${v.date}</a
+            >${date}</a
             >
         </td>
         <td class="d-none d-sm-table-cell">

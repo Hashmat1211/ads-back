@@ -9,20 +9,16 @@ const projectSchema = mongoose.Schema({
         required: true
     },
     status: {
-        type: String,
-        required: true
+        type: String
     },
     amount: {
-        type: String,
-        required: true
+        type: String
     },
     details: {
-        type: String,
-        required: true
+        type: String
     },
     date: {
-        type: String,
-        required: true
+        type: Date
     }
 });
 

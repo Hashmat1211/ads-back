@@ -1143,40 +1143,36 @@
           </div>
 
           <div class="block-header block-header-default">
-            <div class="form-group row  bg-white">
+            <div class="form-group row">
+              <label class="col-12" for="startDate">Choose Start Date</label>
               <div class="col-lg-8">
-                <div class="form-material">
-                  <input
-                    type="text"
-                    class="js-datepicker form-control"
-                    id="startDate"
-                    name="startDate"
-                    data-week-start="1"
-                    data-autoclose="true"
-                    data-today-highlight="true"
-                    data-date-format="yy/mm/dd"
-                    placeholder="yy/mm/dd"
-                  />
-                  <label for="startDate">Start date</label>
-                </div>
+                <input
+                  type="text"
+                  class="js-datepicker form-control"
+                  id="startDate"
+                  name="startDate"
+                  data-week-start="1"
+                  data-autoclose="true"
+                  data-today-highlight="true"
+                  data-date-format="mm/dd/yy"
+                  placeholder="mm/dd/yy"
+                />
               </div>
             </div>
-            <div class="form-group row  bg-white">
+            <div class="form-group row">
+              <label class="col-12" for="endDate">Choose End Date</label>
               <div class="col-lg-8">
-                <div class="form-material">
-                  <input
-                    type="text"
-                    class="js-datepicker form-control"
-                    id="endDate"
-                    name="endDate"
-                    data-week-start="1"
-                    data-autoclose="true"
-                    data-today-highlight="true"
-                    data-date-format="yy/mm/dd"
-                    placeholder="yy/mm/dd"
-                  />
-                  <label for="endDate">End date</label>
-                </div>
+                <input
+                  type="text"
+                  class="js-datepicker form-control"
+                  id="endDate"
+                  name="endDate"
+                  data-week-start="1"
+                  data-autoclose="true"
+                  data-today-highlight="true"
+                  data-date-format="mm/dd/yy"
+                  placeholder="mm/dd/yy"
+                />
               </div>
             </div>
             <div class="input-group-append">
@@ -1224,10 +1220,7 @@
                             </th>
                           </tr>
                         </thead>
-                        <tbody
-                          id="expensesTable"
-                          style="background-color: rgb(179, 174, 174)"
-                        ></tbody>
+                        <tbody id="expensesTable"></tbody>
                       </table>
                       <div
                         class="invisible"
@@ -1257,17 +1250,17 @@
                           style="background-color: chocolate; color: cornsilk; font-weight: 600;"
                         >
                           <tr>
-                            <th class="text-center">Value</th>
+                            <th class="d-none d-sm-table-cell">Client</th>
+                            <th class="d-none d-sm-table-cell">Project</th>
+                            <th class="d-none d-sm-table-cell">Developer</th>
+                            <th class="d-none d-sm-table-cell">Value</th>
                             <th class="d-none d-sm-table-cell">Hours</th>
                             <th class="d-none d-sm-table-cell">Details</th>
                             <th class="d-none d-sm-table-cell">Start Date</th>
                             <th class="d-none d-sm-table-cell">End Date</th>
                           </tr>
                         </thead>
-                        <tbody
-                          id="incomesTable"
-                          style="background-color: darkgrey;"
-                        ></tbody>
+                        <tbody id="incomesTable"></tbody>
                       </table>
                       <div
                         class="invisible"
@@ -1316,23 +1309,6 @@
     </div>
     <!-- END Page Container -->
 
-    <!--
-            Codebase JS Core
-
-            Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
-            to handle those dependencies through webpack. Please check out assets/_es6/main/bootstrap.js for more info.
-
-            If you like, you could also include them separately directly from the assets/js/core folder in the following
-            order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
-
-            assets/js/core/jquery.min.js
-            assets/js/core/bootstrap.bundle.min.js
-            assets/js/core/simplebar.min.js
-            assets/js/core/jquery-scrollLock.min.js
-            assets/js/core/jquery.appear.min.js
-            assets/js/core/jquery.countTo.min.js
-            assets/js/core/js.cookie.min.js
-        -->
     <script src="public/assets/js/codebase.core.min.js"></script>
 
     <!--
@@ -1350,6 +1326,23 @@
     <!-- Page JS Code -->
 
     <script src="public/assets/js/custom/index.js"></script>
+
+    <script src="public/assets/js/pages/be_forms_plugins.min.js"></script>
+
+    <script src="public/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script>
+      jQuery(function() {
+        Codebase.helpers([
+          "datepicker",
+          "colorpicker",
+          "maxlength",
+          "select2",
+          "rangeslider",
+          "tags-inputs"
+        ]);
+      });
+    </script>
+
     <script src="public/assets/js/pages/be_pages_dashboard.min.js"></script>
   </body>
 </html>

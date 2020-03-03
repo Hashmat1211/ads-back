@@ -14,6 +14,10 @@ function viewIncomesDataTo() {
         const incomes = data.incomes;
         $('#allIncomes').html(data.totalIncomes)
         $.each(incomes, function (i, v) {
+            let startDate = v.startDate;
+            startDate = startDate.substr(0, 10);
+            let endDate = v.endDate;
+            endDate = endDate.substr(0, 10);
             $.get(`developers/getSingleDeveloper/${v.developer}`, function (data) {
                 let developerName = data.developer.name;
                 $.get(`clients/getSingleClient/${v.client}`, function (data) {
@@ -38,10 +42,10 @@ function viewIncomesDataTo() {
                                     <span class="text-black">${v.details}</span>
                             </td>
                             <td class="text-center">
-                                    <span class="text-black">${v.startDate}</span>
+                                    <span class="text-black">${startDate}</span>
                             </td>
                             <td class="text-center">
-                                    <span class="text-black">${v.endDate}</span>
+                                    <span class="text-black">${endDate}</span>
                             </td>
                             <td class="text-center">
                                     <span class="text-black">${v.amount}</span>

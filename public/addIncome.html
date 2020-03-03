@@ -1328,39 +1328,37 @@
                   </div>
 
                   <div class="form-group row">
+                    <label class="col-12" for="startDate"
+                      >Choose Start Date</label
+                    >
                     <div class="col-lg-8">
-                      <div class="form-material">
-                        <input
-                          type="text"
-                          class="js-datepicker form-control"
-                          id="startDate"
-                          name="startDate"
-                          data-week-start="1"
-                          data-autoclose="true"
-                          data-today-highlight="true"
-                          data-date-format="yy/mm/dd"
-                          placeholder="yy/mm/dd"
-                        />
-                        <label for="startDate">Choose a start date</label>
-                      </div>
+                      <input
+                        type="text"
+                        class="js-datepicker form-control"
+                        id="startDate"
+                        name="startDate"
+                        data-week-start="1"
+                        data-autoclose="true"
+                        data-today-highlight="true"
+                        data-date-format="mm/dd/yy"
+                        placeholder="mm/dd/yy"
+                      />
                     </div>
                   </div>
                   <div class="form-group row">
+                    <label class="col-12" for="endDate">Choose End Date</label>
                     <div class="col-lg-8">
-                      <div class="form-material">
-                        <input
-                          type="text"
-                          class="js-datepicker form-control"
-                          id="endDate"
-                          name="endDate"
-                          data-week-start="1"
-                          data-autoclose="true"
-                          data-today-highlight="true"
-                          data-date-format="yy/mm/dd"
-                          placeholder="yy/mm/dd"
-                        />
-                        <label for="endDate">Choose an end date</label>
-                      </div>
+                      <input
+                        type="text"
+                        class="js-datepicker form-control"
+                        id="endDate"
+                        name="endDate"
+                        data-week-start="1"
+                        data-autoclose="true"
+                        data-today-highlight="true"
+                        data-date-format="mm/dd/yy"
+                        placeholder="mm/dd/yy"
+                      />
                     </div>
                   </div>
 
@@ -1419,6 +1417,23 @@
 
     <!-- Page JS Code -->
     <script src="public/assets/js/pages/be_pages_dashboard.min.js"></script>
+
+    <script src="public/assets/js/pages/be_forms_plugins.min.js"></script>
+
+    <script src="public/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script>
+      jQuery(function() {
+        Codebase.helpers([
+          "datepicker",
+          "colorpicker",
+          "maxlength",
+          "select2",
+          "masked-inputs",
+          "rangeslider",
+          "tags-inputs"
+        ]);
+      });
+    </script>
 
     <script src="public/assets/js/custom/addIncome.js"></script>
   </body>

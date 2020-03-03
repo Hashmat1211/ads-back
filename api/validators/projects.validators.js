@@ -4,10 +4,10 @@ const httpsStatus = require('http-status-codes')
 const addProjectValidator = (req, res, next) => {
     try {
         const errors = {};
-        console.log('req.body ', JSON.stringify(req.body))
-        const { name, details, status, date } = req.body;
-        let { amount } = req.body;
-        amount = Number(amount)
+        console.log('date \n')
+        console.log(req.body.date)
+        const { name } = req.body;
+
 
         // validation for name in req.body
         if (isEmpty(name)) {
@@ -17,30 +17,10 @@ const addProjectValidator = (req, res, next) => {
             errors.name = 'Should be a valid string';
         }
 
-        // validation for status in req.body
-        if (isEmpty(status)) {
-            errors.status = 'status is required.';
 
-        } else if (!isString(status)) {
-            errors.status = 'Should be a valid string';
-        }
-
-        // validation for amount in req.body
-        if (isEmpty(amount)) {
-            errors.amount = 'amount is required.';
-        } else if (!isNumber(amount)) {
-            errors.amount = 'Should be a valid Amountin Numbers';
-        }
-
-        // validation for date in req.body
-        if (isEmpty(date)) {
-            errors.date = 'date is required.';
-
-        } else if (!isString(date)) {
-            errors.date = 'Should be a valid date';
-        }
 
         if (Object.keys(errors).length > 0) {
+            console.log(errors)
             res.status(httpsStatus.BAD_REQUEST).json({
                 error: errors
             })
@@ -60,11 +40,10 @@ const addProjectValidator = (req, res, next) => {
 const updateProjectValidator = (req, res, next) => {
     try {
         const errors = {};
-        console.log('update project \n ', req.body)
+        //TODO: other fields if exist then check
 
-        const { name, details } = req.body;
+        const { name } = req.body;
         const { projectId } = req.params;
-        console.log(req.body)
 
         // validation for id in req.params
         if (!projectId) {

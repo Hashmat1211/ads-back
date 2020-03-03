@@ -68,9 +68,9 @@ function getReport() {
             endDate: `${endDate}`
         }
         ,
-        function (data, status) {
+        function (incomeData, status) {
 
-            if (!data) {
+            if (!incomeData) {
                 $('#totalIncome').html(0);
                 $.post("expenses/search",
                     {
@@ -78,26 +78,26 @@ function getReport() {
                         endDate: `${endDate}`
                     }
                     ,
-                    function (data, status) {
-                        if (!data) {
+                    function (expenseData, status) {
+                        if (!expenseData) {
                             $('#totalExpense').html(0)
 
                             getTotalRevenue(0, 0);
                             return;
                         }
 
-                        const expense = data.total;
-                        const expenseList = data.expenses;
+                        const expense = expenseData.total;
+                        const expenseList = expenseData.expenses;
                         console.log('expense list ', expenseList)
                         $.each(expenseList, function (i, v) {
                             console.log(i, v)
                             expensesRows += `<tr  role='row' class='odd'>`;
                             expensesRows += ` <td>
-                        <a
-                            class="font-w600"
-                        >${v.date}</a
-                        >
-                        </td >
+                            <a
+                                class="font-w600"
+                            >${v.date}</a
+                            >
+                            </td >
                             <td class="d-none d-sm-table-cell">
                                 <span class="">${v.type}</span>
                             </td>
@@ -118,88 +118,114 @@ function getReport() {
                         getTotalRevenue(expense, 0);
                     });
                 return;
-            }
-            const income = data.total;
-            const incomesList = data.incomes
-            console.log('incomesList ', incomesList)
+            } else {
+                const income = incomeData.total;
+                const incomesList = incomeData.incomes
 
-            $.each(incomesList, function (i, v) {
-                incomesRows += `<tr   role='row' class='odd'>`;
-                incomesRows += `
-                    <td class="text-center">
-                    <span class="text-black">${v.amount}</span>
-                    </td>
-                    <td class="d-none d-sm-table-cell">
-                            <span class="">${v.hours}</span>
-                    </td>
-                    
-                     
-                    <td class="text-center">
-                            <span class="text-black">${v.details}</span>
-                    </td>
-                    <td class="text-center">
-                            <span class="text-black">${v.startDate}</span>
-                    </td>
-                    <td class="text-center">
-                            <span class="text-black">${v.endDate}</span>
-                    </td>
-                    
-                     
-                    </tr>`;
-            });
+                $.each(incomesList, function (i, v) {
+                    let startDate = v.startDate;
+                    startDate = startDate.substr(0, 10);
+                    let endDate = v.endDate;
+                    endDate = endDate.substr(0, 10);
+                    /* get developer name and client and project name */
+                    $.get(`developers/getSingleDeveloper/${v.developer}`, function (developerData) {
+                        let developerName = developerData.developer.name;
+                        $.get(`clients/getSingleClient/${v.client}`, function (clientData) {
+                            let clientName = clientData.client.name;
+                            $.get(`projects/getSingleProject/${v.project}`, function (projectData) {
+                                let projectName = projectData.project.name;
+                                incomesRows += `<tr   role='row' class='odd'>`;
+                                incomesRows += `
+    
+                                <td class="text-center">
+                                <span class="text-black">${clientName}</span>
+                                </td>
+                                <td class="text-center">
+                                <span class="text-black">${projectName}</span>
+                                </td>
+                                <td class="text-center">
+                                <span class="text-black">${developerName}</span>
+                                </td>
+                            
+                                <td class="text-center">
+                                <span class="text-black">${v.amount}</span>
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                        <span class="">${v.hours}</span>
+                                </td>
+                                
+                                
+                                <td class="text-center">
+                                        <span class="text-black">${v.details}</span>
+                                </td>
+                                <td class="text-center">
+                                        <span class="text-black">${startDate}</span>
+                                </td>
+                                <td class="text-center">
+                                        <span class="text-black">${endDate}</span>
+                                </td>
+                                
+                                
+                                </tr>`;
+                                $('#incomesTable').append(incomesRows);
 
-            $('#totalIncome').html(income)
-            $('#incomesTable').append(incomesRows);
-            $.post("expenses/search",
-                {
-                    startDate: `${startDate}`,
-                    endDate: `${endDate}`
-                }
-                ,
-                function (data, status) {
-                    if (!data) {
-                        $('#totalExpense').html(0)
-
-                        getTotalRevenue(0, income);
-                        return;
-                    }
-
-
-                    const expenseList = data.expenses;
-                    console.log('expense list ', expenseList)
-                    $.each(expenseList, function (i, v) {
-                        console.log(i, v)
-
-                        expensesRows += `<tr  role='row' class='odd'>`;
-                        expensesRows += ` <td>
- 
-                            <a
-                                class="font-w600"
-                            >${v.date}</a
-                            >
-                            </td >
-                            <td class="d-none d-sm-table-cell">
-                                <span class="">${v.type}</span>
-                            </td>
-                            <td class="d-none d-sm-table-cell">
-                                <span>${v.payee}</span>
-                            </td>
-                            <td >
-                                ${v.amount}
-                            </td>
-                            <td>
-                                ${v.details}
-                            </td>
-                            </tr>`
+                            })
+                        })
                     })
-                    $('#expensesTable').append(expensesRows);
-                    $('#incomesTable').append(incomesRows);
-                    const totalExpense = data.total;
-                    console.log(incomesRows)
-                    $('#totalExpense').html(totalExpense);
-                    getTotalRevenue(totalExpense, income);
-
                 });
+
+                $('#totalIncome').html(income)
+                $('#incomesTable').append(incomesRows);
+                $.post("expenses/search",
+                    {
+                        startDate: `${startDate}`,
+                        endDate: `${endDate}`
+                    }
+                    ,
+                    function (expenseData, status) {
+                        if (!expenseData) {
+                            $('#totalExpense').html(0)
+
+                            getTotalRevenue(0, income);
+                            return;
+                        }
+
+                        const totalExpense = expenseData.total;
+                        const expenseList = expenseData.expenses;
+                        $.each(expenseList, function (i, v) {
+                            let date = v.date;
+                            date = date.substr(0, 10);
+
+                            expensesRows += `<tr  role='row' class='odd'>`;
+                            expensesRows += ` <td>
+     
+                                <a
+                                    class="font-w600"
+                                >${date}</a
+                                >
+                                </td >
+                                <td class="d-none d-sm-table-cell">
+                                    <span class="">${v.type}</span>
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                    <span>${v.payee}</span>
+                                </td>
+                                <td >
+                                    ${v.amount}
+                                </td>
+                                <td>
+                                    ${v.details}
+                                </td>
+                                </tr>`
+                        })
+                        $('#expensesTable').append(expensesRows);
+                        $('#incomesTable').append(incomesRows);
+                        $('#totalExpense').html(totalExpense);
+                        getTotalRevenue(totalExpense, income);
+
+                    });
+
+            }
 
         });
 
@@ -209,17 +235,16 @@ function getTotalRevenue(expenses, incomes) {
 
     console.log('income ', Number(incomes))
     if (Number(expenses) > Number(incomes)) {
-        console.log('heree e')
+        /* console.log('heree e')
         console.log('expense ', Number(expenses))
-        console.log('income ', Number(incomes))
+        console.log('income ', Number(incomes)) */
         let profit = (Number(expenses) - Number(incomes));
         profit += ' loss';
-        console.log(profit)
         $('#netIncome').html(profit)
     } else {
-        console.log('he r re')
-        console.log('expense ', Number(expenses))
-        console.log('income ', Number(incomes))
+        /* console.log('he r re')
+         console.log('expense ', Number(expenses))
+         console.log('income ', Number(incomes)) */
         let profit = (Number(incomes) - Number(expenses));
         profit += ' profit'
         console.log(profit)

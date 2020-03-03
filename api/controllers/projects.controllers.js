@@ -5,7 +5,8 @@ const httpsStatus = require('http-status-codes');
 const addNewProject = async (req, res) => {
     try {
 
-        const { status, amount, details, date, name } = req.body;
+        const { status, amount, details, name } = req.body;
+        let date = new Date(`${req.body.date} GMT`);
 
         const prepObj = {
             _id: mongoose.Types.ObjectId(),

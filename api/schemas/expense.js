@@ -21,8 +21,7 @@ const expenseSchema = mongoose.Schema({
         required: true
     },
     details: {
-        type: String,
-        required: true
+        type: String
     }
 });
 

@@ -15,7 +15,7 @@ const addNewExpense = async (req, res) => {
                 date,
                 details
             }
-            const newExpense = await ExpenseModel.addNewExpense(prepObj);
+            await ExpenseModel.addNewExpense(prepObj);
 
             res.status(httpsStatus.CREATED).send({
                 message: 'Content created'
@@ -134,7 +134,7 @@ const searchExpense = async (req, res) => {
         const obj = {
             total_Amount: expenses.reduce((sum, { amount }) => sum + amount, 0)
         }
-        console.log('expenses ', expenses)
+        console.log('expenses ', obj.total_Amount)
         res.status(httpsStatus.OK).json({
             'total': obj.total_Amount,
             'expenses': expenses

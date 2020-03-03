@@ -6,7 +6,7 @@ const httpsStatus = require('http-status-codes')
 const addExpenseValidator = (req, res, next) => {
     try {
         const errors = {};
-        const { type, payee, date, details } = req.body;
+        const { type, payee, date } = req.body;
         let { amount } = req.body;
         amount = Number(amount)
 
@@ -27,13 +27,7 @@ const addExpenseValidator = (req, res, next) => {
             errors.payee = 'Should be a valid string';
         }
 
-        // validation for details in req.body
-        if (isEmpty(details)) {
-            errors.details = 'details is required.';
 
-        } else if (!isString(payee)) {
-            errors.payee = 'Should be a valid string';
-        }
 
         // validation for amount in req.body
         if (isEmpty(amount)) {
