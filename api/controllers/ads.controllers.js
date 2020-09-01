@@ -7,6 +7,7 @@ const fs = require('fs')
 
 const testScrap = async (req, res, next) => {
     try {
+        console.log(req.body)
         const { url } = req.body
         const html = await run(url)
 
@@ -45,8 +46,10 @@ const run = async (url) => {
         try {
             const browser = await puppeteer.launch({
                 headless: true,
-                args: ["--disable-setuid-sandbox"],
-                'ignoreHTTPSErrors': true
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                ],
             });
             const page = await browser.newPage();
             await page.setRequestInterception(true)
