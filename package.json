@@ -1,30 +1,26 @@
 {
-  "name": "office-financial-app",
+  "name": "fb-ads",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Hashmat1211/office-financial-app.git"
-  },
   "keywords": [],
-  "author": "",
+  "author": "Hashmat Ali",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Hashmat1211/office-financial-app/issues"
   },
-  "homepage": "https://github.com/Hashmat1211/office-financial-app#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "date-fns": "^2.9.0",
+    "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
+    "got": "^10.4.0",
     "http-status-codes": "^1.4.0",
-    "moment": "^2.24.0",
-    "mongoose": "^5.8.11",
-    "morgan": "^1.9.1",
-    "nodemon": "^2.0.2"
+    "jsdom": "^16.2.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
+    "puppeteer": "^5.2.1"
   }
 }

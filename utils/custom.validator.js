@@ -1,20 +1,11 @@
-var ObjectId = require('mongoose').Types.ObjectId;
 
-const isValidObjectId = (id) => {
-  if (ObjectId.isValid(id)) {
-
-    return true
-
-  } else {
-    return false
-  }
-}
 const isEmpty = (value) => {
   if (
     value === undefined ||
     value === null ||
     (typeof value === 'object' && Object.keys(value).length === 0) ||
-    (typeof value === 'string' && value.trim().length === 0)
+    (typeof value === 'string' && value.trim().length === 0) ||
+    (isArray(value) && value.length === 0)
   ) {
     return true;
   } else {
@@ -59,7 +50,7 @@ const isEmail = (value) => {
  */
 const isArray = (value) => {
 
-  if (value.constructor === Array) {
+  if (Array.isArray(value)) {
     return true;
   } else {
     return false;
@@ -176,7 +167,6 @@ module.exports = {
   isNumber,
   isEmail,
   isEmpty,
-  isValidObjectId,
   validateName,
   validatePhone,
   isString,

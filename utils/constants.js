@@ -1,0 +1,14 @@
+
+const ADS_COUNTRIES_REACHED = ['US', 'GB', 'BR']
+const AD_TYPE = ['ALL', 'CREDIT_ADS', 'EMPLOYMENT_ADS', 'HOUSING_ADS',
+    'POLITICAL_AND_ISSUE_ADS', 'UNCATEGORIZED_ADS']
+const SEARCH_TERMS = 'aoc';
+const STATUS = ['ACTIVE', 'INACTIVE', 'ALL'];
+
+
+module.exports = {
+    ADS_COUNTRIES_REACHED,
+    AD_TYPE,
+    SEARCH_TERMS,
+    STATUS
+}
